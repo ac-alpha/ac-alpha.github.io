@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Resume
+title: Résumé
 subtitle: Hire me
 ---
 
