@@ -25,7 +25,7 @@ description: Computer Science Undergraduate
 navbar-links:
   Home: "https://ac-alpha.github.io"
   About Me: "aboutme"
-  Resume: "newtest"
+  Resume: "resume"
   #Resources:
   #  - Beautiful Jekyll: "http://deanattali.com/beautiful-jekyll/"
 
