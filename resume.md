@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Résumé
-subtitle: Hire me
+subtitle: Wanna hire me?
 ---
 
 <a href="/Resume.pdf" download> Download </a>
