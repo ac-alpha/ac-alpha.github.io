@@ -4,7 +4,8 @@ title: Variational Auto Encoders
 subtitle:  Basic implementation of VAEs
 tags: [deeplearning]
 comments: true
-gh-repo: 
+gh-repo: ac-alpha/VAEs-using-Pytorch
+gh-badge: [star, fork, follow]
 ---
 
 # Introduction
@@ -17,19 +18,19 @@ In traditional auto encoders, the task of the encoder to learn some probability 
 
 Variational auto encoders sought to solve this problem by making the distribution `P(z | X)` close to a known tractable distribution `Q(z)` (usually a Gaussian distribution). So the objective of the variational auto encoder becomes to minimise the KL Divergence between the distributions `P(z | X)` and `Q(z)`, i.e. to minimise the following equation:
 
-![](images/VAE_Eq2.png.png)
+<img src="/img/25022019/VAE_Eq2.png" align="center" />
 
 On expanding the term `P(z | X)`, using bayes' rule, we get the following equation:
 
-![](images/VAE_Eq3.png.png)
+<img src="/img/25022019/VAE_Eq3.png" align="center" />
 
 Where since `P(X)` is independent of `Q(z)` so it has been taken out of the expectation. Upon rearranging equation 3, we get
 
-![](images/VAE_Eq4.png.png)
+<img src="/img/25022019/VAE_Eq4.png" align="center" />
 
 Now, since we know `X` so `P(X)` is a known constant term. Second term on the LHS is the KLD term which we wanted to minimize. So, indirectly, now we want the LHS to be maximized. Since we’re interested in inferring `P(X)`, it makes sense to construct a `Q` which does depend on `X`. So the equation becomes : 
 
-![](images/VAE_Eq5.png.png)
+<img src="/img/25022019/VAE_Eq5.png" align="center" />
 
 This is the core equation of a variaional autoencoder which we want to optimize. Focussing on the RHS of this equation, we see that it contains two distinguishable terms. First one is the likelihood of the data `X` given `z`, which correspond to the Maximum Likelihood Loss which is traditionally used in an auto encoder as a loss function. However, the second term on the RHS contains the KLD between the distribution to be learned `Q(z | X)` and some known distribution like gaussian. The second term is sought to be regularizing the traditional MLE loss.
 
@@ -37,7 +38,7 @@ This is the core equation of a variaional autoencoder which we want to optimize.
 
 One problem still left with our model is that our model still contains a stochastic unit which samples `z` from `Q(z | X)`. Stochastic gradient descent via backpropagation can handle stochastic inputs, but not stochastic units within the network! Solution to this problem is called the reparametrization trick. What we do is to move the sampling to an input layer. Given `m(X)` and `S(X)` — the mean and covariance of `Q(z | X)` — we can sample from `N(m(X), S(X))` by first sampling `e` belonging to `N(0, I)`, then computing `z = m(X) + e*(S(X)^1/2)`.
 
-![](images/VAE_pipeline.png)
+<img src="/img/25022019/VAE_pipeline.png" align="center" />
 
 I have used [MNIST](http://yann.lecun.com/exdb/mnist/) dataset to train a very basic VAE using the pytorch framework. The full code is well documented and maintained at this [github repository](https://github.com/ac-alpha/VAEs-using-Pytorch). Don't forget to leave a star if you liked the repository. :)
 
