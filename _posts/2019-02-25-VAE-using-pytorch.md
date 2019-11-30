@@ -40,7 +40,7 @@ One problem still left with our model is that our model still contains a stochas
 
 <img src="/img/25022019/VAE_pipeline.png" align="center" />
 
-I have used [MNIST](http://yann.lecun.com/exdb/mnist/) dataset to train a very basic VAE using the pytorch framework. The full code is well documented and maintained at this [github repository](https://github.com/ac-alpha/VAEs-using-Pytorch). Don't forget to leave a star if you liked the repository. :)
+I have used [MNIST](https://pytorch.org/docs/stable/_modules/torchvision/datasets/mnist.html) dataset to train a very basic VAE using the pytorch framework. The full code is well documented and maintained at this [github repository](https://github.com/ac-alpha/VAEs-using-Pytorch). Don't forget to leave a star if you liked the repository. :)
 
 ## References
 
