@@ -6,8 +6,6 @@ tags: [general, deeplearning]
 comments: true
 ---
 
-# 
-
 ## Introduction
 
 Recently I successfully completed my summer internship as Project Assisstant at Video Analytics Lab, IISc Bangalore. This was my first onsite internship experience which I enjoyed a lot. I got to know about VAL through a senior who had also completed his internship in the same lab. In this post I would be covering the whole procedure of getting an internship at VAL as well as what are the things you get to learn and work upon at VAL. Please note that this post is just about an internship at VAL. Experiences might differ for a Research Assistant or a PhD. Also, this is just a review about the internship experience as a whole and does not include the details of my actual project at VAL as I am not authorised to share the same. ;)
