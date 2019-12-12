@@ -6,7 +6,7 @@ tags: [general, deeplearning]
 comments: true
 ---
 
-
+<div style="text-align:center"><img src="/img/01082019/vallogo.jpg" /></div>
 
 ## Introduction
 
