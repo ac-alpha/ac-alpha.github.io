@@ -8,6 +8,8 @@ gh-repo: ac-alpha/VAEs-using-Pytorch
 gh-badge: [star, fork, follow]
 ---
 
+<div style="text-align:center"><img src="/img/01082019/vallogo.jpg" /></div>
+
 # Introduction
 
 Auto-Encoders are a class of Generative Models which are generally used for dimensionality reduction, i.e. to embed the data into a lower dimension latent space. Simply put, auto encoders, as the name suggests, encode the data into some latent space for better feature representation. For training, Auto-Encoders consist of a encoder network and a decoder network. The encoder network encodes the input `X` into the latent dimension `z` while the decoder network takes the input as represented in the latent dimension `z` and tries to convert it back into the input `X'`.  Auto encoders are sometimes also used to map the input to a higher dimension latent space (**Overcomplete Autoencoders**).
