@@ -11,6 +11,11 @@ facebook:
   baseURL: "https://www.facebook.com/"
   icon: "fa-facebook"
 
+gscholar:
+  name: "GoogleScholar"
+  baseURL: "https://scholar.google.com/"
+  icon: "fa-graduation-cap"
+
 github:
   name: "GitHub"
   baseURL: "https://github.com/"
