@@ -6,7 +6,7 @@ tags: [general, deeplearning, interns]
 comments: true
 ---
 
-<div style="text-align:center"><img src="/img/06082020/adobelogo.jpg" /></div>
+<div style="text-align:center"><img src="/img/06082020/adobelogo.png" /></div>
 
 ## Introduction
 
