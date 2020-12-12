@@ -2,7 +2,7 @@
 layout: post
 title: My Internship Experience
 subtitle: Video Analytics Lab, IISc Bangalore
-tags: [general, deeplearning]
+tags: [general, deeplearning, interns]
 comments: true
 ---
 
