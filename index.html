@@ -1,31 +1,292 @@
 <!DOCTYPE HTML>
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en">
 
-  <title>Ashutosh Chaubey</title>
-  
-  <meta name="author" content="Jon Barron">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <link rel="stylesheet" type="text/css" href="stylesheet.css">
-	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashutosh Chaubey</title>
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffffff;
+            color: #555; /* Softer gray for body text */
+            line-height: 1.6;
+            padding: 20px;
+            font-size: 0.95em; /* Reduced from 1em */
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #ddd; /* Soft divider color */
+        }
+
+        header h1 {
+            font-size: 2.2em; /* Reduced from 2.5em */
+            color: #242424; /* Dark teal for main header */
+        }
+
+        .about-section {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 40px 0;
+            align-items: center;
+        }
+
+        .about-text {
+            flex: 2;
+            padding: 20px;
+        }
+
+        .about-text h2 {
+            font-size: 1.8em; /* Reduced from 2em */
+            color: #242424; /* Slightly muted teal */
+            margin-bottom: 10px;
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+            font-size: 1em; /* Reduced from 1.1em */
+            color: #555; /* Softer gray */
+        }
+
+        .about-text em
+        {
+            margin-bottom: 5px;
+            font-size: 1.2em; /* Reduced from 1.1em */
+            color: #000000; /* Softer gray */
+        }
+
+        .about-image {
+            flex: 1;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            /* border-radius: 8px;
+            border: 1px solid #ccc; */
+        }
+
+        .links {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .links a {
+            text-decoration: underline;
+            color: #00aeff; /* Muted blue */
+            margin: 0 10px;
+            font-size: 0.95em; /* Reduced from 1em */
+            position: relative;
+            padding-bottom: 2px;
+            transition: color 0.3s, background-color 0.3s, padding 0.3s; /* Added background-color and padding transitions */
+        }
+
+        .links a:hover {
+            color: #ffffff; /* White text on hover */
+            background-color: #00aeff; /* Muted blue background on hover */
+            padding: 4px 8px; /* Increased padding for better visibility */
+            border-radius: 4px; /* Rounded corners */
+            /* Optional: Add a subtle box-shadow for depth */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        a {
+            text-decoration: underline;
+            color: #00aeff; /* Muted blue */
+            margin: 0px;
+            font-size: 0.95em; /* Reduced from 1em */
+            position: relative;
+            padding-bottom: 2px;
+            transition: color 0.3s, background-color 0.3s, padding 0.3s; /* Added background-color and padding transitions */
+        }
+
+        a:hover {
+            color: #ffffff; /* White text on hover */
+            background-color: #00aeff; /* Muted blue background on hover */
+            padding: 4px 8px; /* Increased padding for better visibility */
+            border-radius: 4px; /* Rounded corners */
+            /* Optional: Add a subtle box-shadow for depth */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .summary-section {
+            margin: 40px 0;
+        }
+
+        .accordion {
+            background-color: #f9f9f9; /* Light background for distinction */
+            padding: 15px;
+            border-radius: 5px;
+            /* border: 1px solid #ddd; Soft border */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .accordion summary {
+            font-size: 1.0em; /* Consistent with section headings */
+            color: #000000; /* Same color as other headings */
+            cursor: pointer;
+            outline: none;
+            position: relative;
+            padding: 5px 0;
+            list-style: none; /* Remove default marker */
+        }
+
+        .accordion summary::-webkit-details-marker {
+            display: none; /* Remove default disclosure triangle */
+        }
+
+        .accordion summary::before {
+            content: '▸'; /* Custom marker */
+            display: inline-block;
+            margin-right: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion[open] summary::before {
+            transform: rotate(90deg); /* Rotate marker when open */
+        }
+
+        .accordion .content {
+            max-height: 0;
+            opacity: 0;
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+            overflow: hidden;
+        }
+
+        .accordion[open] .content {
+            max-height: 500px; /* Arbitrary large value to accommodate content */
+            opacity: 1;
+            margin-top: 10px;
+        }
+
+        .section {
+            margin: 40px 0;
+        }
+
+        .section h2 {
+            font-size: 1.8em; /* Reduced from 2em */
+            margin-bottom: 15px;
+            color: #242424; /* Consistent teal for section headings */
+            border-bottom: 2px solid #ddd; /* Light divider */
+            padding-bottom: 5px;
+        }
+
+        .section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section ul li {
+            margin-bottom: 10px;
+            font-size: 1em; /* Reduced from 1.1em */
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .section ul li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #777; /* Soft gray bullet */
+        }
+
+        .interests h2 {
+            font-size: 1.2em; /* Reduced from 2em */
+            margin-bottom: 15px;
+            color: #242424; /* Consistent teal for section headings */
+            border-bottom: 2px solid #ddd; /* Light divider */
+            padding-bottom: 5px;
+        }
+
+        .publication {
+            margin-bottom: 25px;
+        }
+
+        .publication h3 {
+            font-size: 1.3em; /* Reduced from 1.5em */
+            color: #242424;
+            margin-top: 20px;
+        }
+
+        .publication p {
+            margin-bottom: 8px;
+            font-size: 0.95em; /* Reduced from 1em */
+            color: #555;
+        }
+
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #777;
+            margin-top: 40px;
+            border-top: 1px solid #ddd; /* Soft divider */
+            font-size: 0.9em; /* Reduced from 1em */
+        }
+
+        footer a {
+            color: #777;
+            text-decoration: none;
+            border-bottom: 1px solid #ccc;
+            transition: color 0.3s, background-color 0.3s, padding 0.3s; /* Added background-color and padding transitions */
+        }
+
+        footer a:hover {
+            color: #ffffff; /* White text on hover */
+            background-color: #000000; /* Muted blue background on hover */
+            padding: 4px 8px; /* Increased padding for better visibility */
+            border-radius: 4px; /* Rounded corners */
+            /* Optional: Add a subtle box-shadow for depth */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .about-section {
+                flex-direction: column;
+            }
+
+            .about-text,
+            .about-image {
+                padding: 10px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-  <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-    <tr style="padding:0px">
-      <td style="padding:0px">
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          <tr style="padding:0px">
-            <td style="padding:2.5%;width:63%;vertical-align:middle">
-              <p style="text-align:center">
-                <name>Ashutosh Chaubey</name>
-              </p>
-              <p>I am a CS PhD student at the <a href="https://ict.usc.edu/">Institute for Creative Technologies</a>, <a href="https://www.usc.edu/">University of Southern California</a>, where I am advised by <a href="https://people.ict.usc.edu/~soleymani/">Prof. Mohammad Soleymani</a> at the <a href="https://www.ihp-lab.org/">Intelligent Human Perception Lab</a>. I am a <i>Bronze Medallist</i> from the 2021 batch of <a href="https://www.iitr.ac.in/">Indian Institute of Technology, Roorkee</a>
-              </p>
-              <p>
-                Prior to this, I was a Founding Research Engineer at <a href="https://www.anoki.ai/">Anoki AI</a> where I worked on projects related to content retrieval using audio/text and text-to-speech. 
-                I have also worked at <a href="https://lgads.tv/">LG Ad Solutions</a> as a Data Scientist, 
-                where I spent some time working on speaker recognition, automatic content recognition using audio and voice cloning.
+    <header>
+        <h1>Ashutosh Chaubey</h1>
+    </header>
+
+    <div class="container">
+        <section class="about-section">
+            <div class="about-text">
+                <h2>About Me</h2>
+                <p>I am a CS PhD student at the <a href="https://ict.usc.edu/">Institute for Creative Technologies</a>, <a href="https://www.usc.edu/">University of Southern California</a>, 
+                    where I am advised by <a href="https://people.ict.usc.edu/~soleymani/">Prof. Mohammad Soleymani</a> at the <a href="https://www.ihp-lab.org/">Intelligent Human Perception Lab</a>. 
+                    I am a <i>Bronze Medallist</i> from the 2021 batch of <a href="https://www.iitr.ac.in/">Indian Institute of Technology, Roorkee</a>.</p>
+
+                
+                <p>Prior to this, I was a Founding Research Engineer at <a href="https://www.anoki.ai/">Anoki AI</a> where I worked on <b>multimodal content understanding and retrieval</b>. 
+                I have also worked at <a href="https://lgads.tv/">LG Ad Solutions</a> 
+                on <b>speaker recognition, automatic content recognition using audio and voice cloning</b>.
                 Over the past I have interned at <a href="https://research.adobe.com/">Adobe Research</a>, 
                 where I worked with <a href="https://scholar.google.com/citations?user=Dluf41wAAAAJ&hl=en">Dr. Sumit Shekhar</a> 
                 on active learning for content labelling in documents. 
@@ -33,372 +294,113 @@
                 where I worked with <a href="https://scholar.google.co.in/citations?user=cVg7HrEAAAAJ&hl=en">Prof. R. Venkatesh Babu</a> 
                 on human pose estimation from a single RGB image. Back at my undergraduate college, 
                 I worked with <a href="https://scholar.google.co.in/citations?user=QU2O6JMAAAAJ&hl=en">Prof. R. Balasubramanian</a> 
-                on automatic evaluation of machine synthesized speech.
-              </p>
+                on automatic evaluation of machine synthesized speech.</p>
+                <p>I am always eager to collaborate on research with people in academia as well as industry. Please reach out to <a href="mailto:achaubey@usc.edu">achaubey@usc.edu</a> to discuss potential collaborations.</p>
+                <p><strong>Currently, I am looking for Research/Applied Scientist internship positions for Summer 2025.</strong> Please <a href="mailto:achaubey@usc.edu">reach out</a> if you have open positions.</p>
+                
+                <section class="summary-section">
+                    <details class="accordion">
+                        <summary>Masters/Undergrad Students</summary>
+                        <div class="content">
+                            <p>If you are a student and want to have a discussion with me regarding my papers or how to apply for a PhD program in the US, please email me at achaubey at usc dot edu</p>
+                            <p>For students who wish to join our lab, please check our lab's <a href="https://www.ihp-lab.org/vacancies/">open positions</a>.</p>
+                        </div>
+                    </details>
+                </section>
 
-              <p>
-                I am always eager to collaborate on research with people in academia as well as industry. Please reach out to achaubey at usc dot edu to discuss potential collaborations.
-                <br>Currently, <b>I am looking for Research/Applied Scientist internship positions for Summer 2025</b>. Please <a href="mailto:achaubey@usc.edu">reach out</a> if you have open positions.
-              </p>
-              
-
-              <p style="text-align:center">
-                <a href="mailto:ashutoshchaubey2999@gmail.com">Email</a> &nbsp/&nbsp
-                <a href="misc_data/Ashutosh_Chaubey_CV.pdf">CV</a> &nbsp/&nbsp
-                <a href="https://scholar.google.com/citations?user=8g_xYb0AAAAJ&hl=en&authuser=1">Google Scholar</a> &nbsp/&nbsp
-                <a href="https://www.linkedin.com/in/ashutosh-chaubey/">Linkedin</a> &nbsp/&nbsp
-                <a href="https://github.com/ac-alpha/">Github</a>
-              </p>
-              
-            </td>
-            <td style="padding:2.5%;width:40%;max-width:40%">
-              <a href="imgs/self_portrait_taipei.png"><img style="width:100%;max-width:100%" alt="profile photo" src="imgs/self_portrait_taipei.png" class="hoverZoomLink"></a>
-            </td>
-          </tr>
-        </tbody></table>
-
-        <details>
-          <summary>Masters/Undergrad Students</summary>
-      
-          <p>If you are a student and want to have a discussion with me regarding my papers or how to apply for a PhD program in the US, please email me at achaubey at usc dot edu</p>
-          <p>For students who wish to join our lab, please check our lab's <a href="https://www.ihp-lab.org/vacancies/">open positions</a>.</p>
-      </details>
-
-      <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-        <tr>
-        <td style="padding:20px;width:100%;vertical-align:middle">
-          <heading>News</heading>
-          <div id="bodydesc" style="margin-left:auto; margin-right:auto; width:960px; height: 100px; overflow-y: scroll;">
-
-            <ul>
-              
-              <li> Aug '24 - I joined the Intelligent Human Perception Lab @ Institute for Creative Technologies, USC.
-              <li> Apr '24 - I will be starting my PhD @ University of Southern California starting this Fall. Fight on!
-              <li> Sep '23 - One paper has been accepted at ASRU, 2023. See you in Taipei!
-              <li> Apr '23 - I have joined Anoki Inc. as a Founding Research Engineer.
-              <li> Sep '22 - I will be at Interspeech 2022 at Incheon, Korea.
-              <li> Jun '22 - One paper has been accepted at Interspeech, 2022!
-              <li> Jul '21 - I have started my industry experience by joining LG Ad Solutions as a Data Scientist. On to new challenges!
-            </ul>  
-        
-        </div>
-        </td>
-      </tr>
-    </tbody></table>
-
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-            <td style="padding:20px;width:100%;vertical-align:middle">
-              <heading>Research</heading>
-              <p>
-                I have experience working on speaker recognition and speech processing systems. 
-                More recently, I am working on computer vision where I deal with problems related to multi-person interaction, behaviour generation and diffusion models.
-              </p>
-            </td>
-          </tr>
-        </tbody></table>
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-				
-          <tr onmouseout="idn_stop()" onmouseover="idn_start()">
-            <td style="padding:20px;width:25%;vertical-align:middle">
-              <div class="one">
-                <div class="two" id='idn_image'>
-                  <img src='imgs/idn_1.png' width="160"></div>
-                <img src='imgs/idn_2.png' width="160">
-              </div>
-              <script type="text/javascript">
-                function idn_start() {
-                  document.getElementById('idn_image').style.opacity = "1";
-                }
-
-                function idn_stop() {
-                  document.getElementById('idn_image').style.opacity = "0";
-                }
-                idn_stop()
-              </script>
-            </td>
-            <td style="padding:20px;width:75%;vertical-align:middle">
-              <a href="https://arxiv.org/abs/2306.00952">
-                <papertitle>Meta-Learning Framework for End-to-End Imposter Identification in Unseen Speaker Recognition</papertitle>
-              </a>
-              <br>
-              <strong>Ashutosh Chaubey</strong>, 
-              <a href="https://www.linkedin.com/in/sparsh-sinha-2b824018b/">Sparsh Sinha</a>,
-              <a href="https://www.linkedin.com/in/susmitaghose/">Susmita Ghose</a>
-              <br>
-              <em>IEEE ASRU</em>, 2023
-              <br>
-              <a href="https://docs.google.com/presentation/d/1lPLo7s77JfLhfwStNgWdgqkLG1zfg-o7tJxaAFMQsiQ/edit">poster</a>
-              /
-              <a href="https://ieeexplore.ieee.org/document/10389712">paper</a>
-              /
-              <a href="misc_data/idn.bib">cite</a>
-              <p></p>
-              <p>
-                Proposed two novel approaches for imposter identification in unseen speaker recognition.
-                One of the approaches is speaker-specific thresholding and the other relies on meta-learning to decouple
-                the problem of imposter identification from speaker identification.
-              </p>
-            </td>
-          </tr>
-
-		  
-          <tr onmouseout="relnet_stop()" onmouseover="relnet_start()">
-            <td style="padding:20px;width:25%;vertical-align:middle">
-              <div class="one">
-                <div class="two" id='relnet_image'>
-                  <img src='imgs/relnet_1.jpg' width="160"></div>
-                <img src='imgs/relnet_2.jpg' width="160">
-              </div>
-              <script type="text/javascript">
-                function relnet_start() {
-                  document.getElementById('relnet_image').style.opacity = "1";
-                }
-
-                function relnet_stop() {
-                  document.getElementById('relnet_image').style.opacity = "0";
-                }
-                relnet_stop()
-              </script>
-            </td>
-            <td style="padding:20px;width:75%;vertical-align:middle">
-              <a href="https://arxiv.org/abs/2203.17218">
-                <papertitle>Improved Relation Networks for End-to-End Speaker Verification and Identification</papertitle>
-              </a>
-              <br>
-              <strong>Ashutosh Chaubey</strong>, 
-              <a href="https://www.linkedin.com/in/sparsh-sinha-2b824018b/">Sparsh Sinha</a>,
-              <a href="https://www.linkedin.com/in/susmitaghose/">Susmita Ghose</a>
-              <br>
-              <em>Interspeech</em>, 2022
-              <br>
-              <a href="https://drive.google.com/file/d/11N1cBs3BGLuu3g9AFZxnu0eeCJWzVr3B/view?usp=sharing">poster</a>
-              /
-              <a href="https://www.isca-speech.org/archive/pdfs/interspeech_2022/chaubey22_interspeech.pdf">paper</a>
-              /
-              <a href="misc_data/relnet.bib">cite</a>
-              <p></p>
-              <p>
-                Inspired from their use in computer vision, we use relation networks for the task of speaker recognition and propose enhancements in terms of global supervision and faster training regime.
-              </p>
-            </td>
-          </tr>		
-          
-          
-          <tr onmouseout="opad_stop()" onmouseover="opad_start()">
-            <td style="padding:20px;width:25%;vertical-align:middle">
-              <div class="one">
-                <div class="two" id='opad_image'>
-                  <img src='imgs/opad_1.png' width="160"></div>
-                <img src='imgs/opad_2.png' width="160">
-              </div>
-              <script type="text/javascript">
-                function opad_start() {
-                  document.getElementById('opad_image').style.opacity = "1";
-                }
-
-                function opad_stop() {
-                  document.getElementById('opad_image').style.opacity = "0";
-                }
-                opad_stop()
-              </script>
-            </td>
-            <td style="padding:20px;width:75%;vertical-align:middle">
-              <a href="https://arxiv.org/abs/2110.02069">
-                <papertitle>OPAD: An Optimized Policy-based Active Learning Framework for Document Content Analysis</papertitle>
-              </a>
-              <br>
-              <a href="https://scholar.google.com/citations?user=Dluf41wAAAAJ&hl=en">Sumit Shekhar</a>,
-              <a href="https://bhanu77prakash.github.io/">Bhanu Prakash Reddy Guda</a>,
-              <strong>Ashutosh Chaubey</strong>, 
-              <a href="https://www.linkedin.com/in/ishan-jindal-9624b5149/?originalSubdomain=in">Ishan Jindal</a>,
-              <a href="https://www.linkedin.com/in/avneetjain/?trk=public_profile_browsemap&originalSubdomain=in">Avneet Jain</a>
-              <br>
-              <em>CVPR Workshops</em>, 2022
-              <br>
-              <a href="https://openaccess.thecvf.com/content/CVPR2022W/FaDE-TCV/papers/Shekhar_OPAD_An_Optimized_Policy-Based_Active_Learning_Framework_for_Document_Content_CVPRW_2022_paper.pdf">paper</a>
-              /
-              <a href="https://patentimages.storage.googleapis.com/db/0d/3b/94433a1eacbccc/US20220253630A1.pdf">patent</a>
-              /
-              <a href="misc_data/opad.bib">cite</a>
-              <p></p>
-              <p>
-                We propose a reinforcement policy based active learning approach for document content labelling tasks such as object detection, layout detection and named entity recognition.
-              </p>
-            </td>
-          </tr>
-		  
-          <tr onmouseout="uap_stop()" onmouseover="uap_start()">
-            <td style="padding:20px;width:25%;vertical-align:middle">
-              <div class="one">
-                <div class="two" id='uap_image'>
-                  <img src='imgs/uap_1.jpg' width="160"></div>
-                <img src='imgs/uap_2.png' width="160">
-              </div>
-              <script type="text/javascript">
-                function uap_start() {
-                  document.getElementById('uap_image').style.opacity = "1";
-                }
-
-                function uap_stop() {
-                  document.getElementById('uap_image').style.opacity = "0";
-                }
-                uap_stop()
-              </script>
-            </td>
-            <td style="padding:20px;width:75%;vertical-align:middle">
-              <a href="https://arxiv.org/abs/2005.08087">
-                <papertitle>Universal Adversarial Perturbations: A Survey</papertitle>
-              </a>
-              <br>
-              <strong>Ashutosh Chaubey*</strong>, 
-              <a href="https://www.linkedin.com/in/nikhilagrawal2000/?originalSubdomain=in">Nikhil Agrawal*</a>,
-              <a href="https://www.linkedin.com/in/kavya-barnwal-0ba720178/?originalSubdomain=in">Kavya Barnwal</a>,
-              <a href="https://kkguliani.netlify.app/">Keerat K. Guliani</a>,
-              <a href="https://www.linkedin.com/in/pramodmehtajgth/?originalSubdomain=in">Pramod Mehta</a>
-              <br>
-              <em>Survey paper</em>, arXiv 2020
-              <br>
-              <a href="https://arxiv.org/abs/2005.08087">paper</a>
-              /
-              <a href="misc_data/uap.bib">cite</a>
-              <p></p>
-              <p>
-                We present a comprehensive survey on universal adversarial perturbations, both attacks and defenses along with future directions for the topic.
-              </p>
-            </td>
-          </tr>		
-
-          <tr onmouseout="evalgan_stop()" onmouseover="evalgan_start()">
-            <td style="padding:20px;width:25%;vertical-align:middle">
-              <div class="one">
-                <div class="two" id='evalgan_image'>
-                  <img src='imgs/evalgan_1.png' width="160"></div>
-                <img src='imgs/evalgan_2.png' width="160">
-              </div>
-              <script type="text/javascript">
-                function evalgan_start() {
-                  document.getElementById('evalgan_image').style.opacity = "1";
-                }
-
-                function evalgan_stop() {
-                  document.getElementById('evalgan_image').style.opacity = "0";
-                }
-                evalgan_stop()
-              </script>
-            </td>
-            <td style="padding:20px;width:75%;vertical-align:middle">
-              <a href="https://dl.acm.org/doi/abs/10.1007/978-3-030-41299-9_45">
-                <papertitle>A Generative Adversarial Network Based Ensemble Technique for Automatic Evaluation of Machine Synthesized Speech</papertitle>
-              </a>
-              <br>
-              <strong>Ashutosh Chaubey*</strong>, 
-              <a href="https://www.linkedin.com/in/jaynil-jaiswal/?originalSubdomain=in">Jaynil Jaiswal*</a>,
-              <a href="https://www.linkedin.com/in/sasikiranreddy/?originalSubdomain=in">Sasi Kiran Reddy Bhimvarapu</a>,
-              <a href="https://www.linkedin.com/in/shashkashyap/?originalSubdomain=in">Shashank Kashyap</a>,
-              <a href="https://scholar.google.co.in/citations?user=8ieLBZ8AAAAJ&hl=en">Puneet Kumar</a>
-              <a href="https://scholar.google.co.in/citations?user=QU2O6JMAAAAJ&hl=en">Balasubramanian Raman</a>
-              <a href="https://scholar.google.co.in/citations?user=moDpyKkAAAAJ&hl=en">Partha Pratim Roy</a>
-              <br>
-              <em>ACPR</em>, 2019
-              <br>
-              <a href="https://link.springer.com/chapter/10.1007/978-3-030-41299-9_45">paper</a>
-              /
-              <a href="misc_data/evalgan.bib">cite</a>
-              <p></p>
-              <p>
-                We propose a technique which leverages the discriminator from a GAN based TTS model for automatic evaluation of machine synthesized speech.
-              </p>
-            </td>
-          </tr>
-
-        </tbody></table>
-
-
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          <tr>
-          <td style="padding:20px;width:100%;vertical-align:middle">
-            <heading>Education</heading>
-          </td>
-        </tr>
-        </tbody></table>
-				
-        <table border=0 class="bg_colour" style="padding:20px;width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto"><tbody>
-
-          <tr>
-            <td style="padding:10px;width:25%;vertical-align:middle">
-                <div class="one">
-                    <img src='imgs/usc_logo.png' width="140" class="side-image">
+            </div>
+            <div class="about-image">
+                <img src="imgs/self_portrait_taipei.png" alt="Ashutosh Chaubey">
+                <section class="links">
+                    <a href="mailto:ashutoshchaubey2999@gmail.com">Email</a>
+                    <a href="misc_data/Ashutosh_Chaubey_CV_latest.pdf">Resume</a>
+                    <a href="https://scholar.google.com/citations?user=8g_xYb0AAAAJ&hl=en&authuser=1">Google Scholar</a>
+                    <a href="https://www.linkedin.com/in/ashutosh-chaubey/">LinkedIn</a>
+                    <a href="https://github.com/ac-alpha/">GitHub</a>
+                </section>
+                <div>
+                    <b><u>Areas of Interest</u></b> <p>Multimodal understanding and generation of human affective behaviour (emotions, expressions, etc.) <br> Speech and audio processing.</p>
                 </div>
-            </td>
-            <td style="padding:10px;width:75%;vertical-align:top">
-                <!-- <papertitle style="color:gray"><big>Software Development Engineer Intern</big> </papertitle> <papertitle ><big> | Expedia Group</big></papertitle> -->
-                <papertitle><big>University of Southern California</big></papertitle>
-                <br>
-                <papertitle>PhD, Computer Science</papertitle>
-                <br>
-                August 2023 - Present
-                <br>
-                <p>
-                    Graduate Researcher - <a href="https://www.ihp-lab.org/">Intelligent Human Perception Lab</a>, <a href="https://ict.usc.edu/">Institute for Creative Technologies</a>
-                </p>
-            </td>
-        </tr>
-
-            <tr>
-                <td style="padding:10px;width:25%;vertical-align:middle">
-                    <div class="one">
-                        <img src='imgs/iitr_logo.png' width="140" class="side-image">
-                    </div>
-                </td>
-                <td style="padding:10px;width:75%;vertical-align:top">
-                    <!-- <papertitle style="color:gray"><big>Software Development Engineer Intern</big> </papertitle> <papertitle ><big> | Expedia Group</big></papertitle> -->
-                    <papertitle><big>Indian Institute of Technology Roorkee</big></papertitle>
-                    <br>
-                    <papertitle>BS, Computer Science</papertitle>
-                    <br>
-                    July 2017 - May 2021, Grade Point - 9.718/10
-                    <br>
-                    <p>
-                        Student Societies:
-                        <ul>
-                            <li>Chair | ACM IIT Roorke Chapter (<a href="http://iitr.acm.org/#/">Link</a>)</li>
-                            <li>Co-President | Vision and Language Group (<a href="https://vlgiitr.github.io/">Link</a>)</li>
-                            <li>Mentor | Student Mentorship Programme (<a href="https://www.linkedin.com/company/smpiitr/">Link</a>)</li>
-                        </ul>
-                    </p>
-                </td>
-            </tr>
-
-        </tbody></table>
-
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          <tr>
-            <td style="padding:20px;width:100%;vertical-align:middle">
-              <heading>Miscellaneous</heading>
-              <p>
-              Presented my paper <a href="https://link.springer.com/chapter/10.1007/978-3-030-41299-9_45">A Generative Adversarial Network Based Ensemble Technique for Automatic Evaluation of Machine Synthesized Speech</a> at the Student Academic Conference at Inter IIT Tech Meet 2019.
-              </p>
-              <p>
-              My hobbies include cooking and playing guitar. I am obsessed with the songs of <a href="https://open.spotify.com/artist/0tC995Rfn9k2l7nqgCZsV7">Prateek Kuhad</a> and <a href="https://open.spotify.com/artist/4gdMJYnopf2nEUcanAwstx">Anuv Jain</a>.
-              </p>
-            </td>
-          </tr>
-        </tbody></table> 
+                
+            </div>
+        </section>
 
 
+        <section class="section">
+            <h2>News</h2>
+            <ul>
+                <li>Aug '24 - I joined the <a href="https://www.ihp-lab.org/">Intelligent Human Perception Lab</a> @ <a href="https://ict.usc.edu/">Institute for Creative Technologies, USC</a>.</li>
+                <li>Apr '24 - I will be starting my PhD @ <a href="https://www.usc.edu/">University of Southern California</a> starting this Fall. Fight on!</li>
+                <li>Sep '23 - One paper has been accepted at <a href="http://www.asru2023.org/">ASRU, 2023</a>. See you in Taipei!</li>
+                <li>Apr '23 - I have joined <a href="https://www.anoki.ai/">Anoki AI</a> as a Founding Research Engineer.</li>
+                <li>Sep '22 - I will be at <a href="https://www.interspeech2022.org/">Interspeech 2022</a> at Incheon, Korea.</li>
+                <li>Jun '22 - One paper has been accepted at <a href="https://www.interspeech2022.org/">Interspeech 2022</a>!</li>
+                <li>Jul '21 - I have started my industry experience by joining <a href="https://lgads.tv/">LG Ad Solutions</a> as a Data Scientist. On to new challenges!</li>
+            </ul>
+        </section>
 
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          <tr>
-            <td style="padding:0px">
-              <br><br>
-              This template has been stolen from <a href="https://jonbarron.info/">here</a>.
-            </td>
-          </tr>
-        </tbody></table>
-      </td>
-    </tr>
-  </table>
+        <section class="section">
+            <h2>Research & Publications</h2>
+            <div class="publication">
+                <h3>Meta-Learning Framework for End-to-End Imposter Identification in Unseen Speaker Recognition</h3>
+                <p><strong>Ashutosh Chaubey</strong>, <a href="https://www.linkedin.com/in/sparsh-sinha-2b824018b/">Sparsh Sinha</a>, <a href="https://www.linkedin.com/in/susmitaghose/">Susmita Ghose</a></p>
+                <p><em>IEEE ASRU</em>, 2023</p>
+                <p><a href="https://arxiv.org/abs/2306.00952">Paper</a> / <a href="https://docs.google.com/presentation/d/1lPLo7s77JfLhfwStNgWdgqkLG1zfg-o7tJxaAFMQsiQ/edit">Poster</a> / <a href="misc_data/idn.bib">Cite</a></p>
+                <p>Proposed two novel approaches for imposter identification in unseen speaker recognition, including speaker-specific thresholding and a meta-learning approach.</p>
+            </div>
+
+            <div class="publication">
+                <h3>Improved Relation Networks for End-to-End Speaker Verification and Identification</h3>
+                <p><strong>Ashutosh Chaubey</strong>, <a href="https://www.linkedin.com/in/sparsh-sinha-2b824018b/">Sparsh Sinha</a>, <a href="https://www.linkedin.com/in/susmitaghose/">Susmita Ghose</a></p>
+                <p><em>Interspeech</em>, 2022</p>
+                <p><a href="https://arxiv.org/abs/2203.17218">Paper</a> / <a href="https://drive.google.com/file/d/11N1cBs3BGLuu3g9AFZxnu0eeCJWzVr3B/view?usp=sharing">Poster</a> / <a href="misc_data/relnet.bib">Cite</a></p>
+                <p>Enhanced speaker recognition using relation networks inspired by computer vision, with global supervision and faster training.</p>
+            </div>
+
+            <div class="publication">
+                <h3>OPAD: An Optimized Policy-based Active Learning Framework for Document Content Analysis</h3>
+                <p><a href="https://scholar.google.com/citations?user=Dluf41wAAAAJ&hl=en">Sumit Shekhar</a>, <a href="https://bhanu77prakash.github.io/">Bhanu Prakash Reddy Guda</a>, <strong>Ashutosh Chaubey</strong>, <a href="https://www.linkedin.com/in/ishan-jindal-9624b5149/?originalSubdomain=in">Ishan Jindal</a>, <a href="https://www.linkedin.com/in/avneetjain/?trk=public_profile_browsemap&originalSubdomain=in">Avneet Jain</a></p>
+                <p><em>CVPR Workshops</em>, 2022</p>
+                <p><a href="https://arxiv.org/abs/2110.02069">Paper</a> / <a href="https://patentimages.storage.googleapis.com/db/0d/3b/94433a1eacbccc/US20220253630A1.pdf">Patent</a> / <a href="misc_data/opad.bib">Cite</a></p>
+                <p>A reinforcement policy-based active learning approach for document content labeling tasks such as object detection and named entity recognition.</p>
+            </div>
+
+            <div class="publication">
+                <h3>Universal Adversarial Perturbations: A Survey</h3>
+                <p><strong>Ashutosh Chaubey*</strong>, <a href="https://www.linkedin.com/in/nikhilagrawal2000/?originalSubdomain=in">Nikhil Agrawal*</a>, <a href="https://www.linkedin.com/in/kavya-barnwal-0ba720178/?originalSubdomain=in">Kavya Barnwal</a>, <a href="https://kkguliani.netlify.app/">Keerat K. Guliani</a>, <a href="https://www.linkedin.com/in/pramodmehtajgth/?originalSubdomain=in">Pramod Mehta</a></p>
+                <p><em>Survey paper</em>, arXiv 2020</p>
+                <p><a href="https://arxiv.org/abs/2005.08087">Paper</a> / <a href="misc_data/uap.bib">Cite</a></p>
+                <p>A comprehensive survey on universal adversarial perturbations, covering both attacks and defenses.</p>
+            </div>
+
+            <div class="publication">
+                <h3>A Generative Adversarial Network Based Ensemble Technique for Automatic Evaluation of Machine Synthesized Speech</h3>
+                <p><strong>Ashutosh Chaubey*</strong>, <a href="https://www.linkedin.com/in/jaynil-jaiswal/?originalSubdomain=in">Jaynil Jaiswal*</a>, <a href="https://www.linkedin.com/in/sasikiranreddy/?originalSubdomain=in">Sasi Kiran Reddy Bhimvarapu</a>, <a href="https://www.linkedin.com/in/shashkashyap/?originalSubdomain=in">Shashank Kashyap</a>, <a href="https://scholar.google.co.in/citations?user=8ieLBZ8AAAAJ&hl=en">Puneet Kumar</a>, <a href="https://scholar.google.co.in/citations?user=QU2O6JMAAAAJ&hl=en">Balasubramanian Raman</a>, <a href="https://scholar.google.co.in/citations?user=moDpyKkAAAAJ&hl=en">Partha Pratim Roy</a></p>
+                <p><em>ACPR</em>, 2019</p>
+                <p><a href="https://dl.acm.org/doi/abs/10.1007/978-3-030-41299-9_45">Paper</a> / <a href="misc_data/evalgan.bib">Cite</a></p>
+                <p>Proposed a technique leveraging the discriminator from a GAN-based TTS model for automatic evaluation of machine synthesized speech.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Education</h2>
+            <p><strong>University of Southern California</strong> – PhD, Computer Science (2024 - Present)</p>
+            <p>Graduate Researcher – <a href="https://www.ihp-lab.org/">Intelligent Human Perception Lab</a>, <a href="https://ict.usc.edu/">Institute for Creative Technologies</a></p>
+            <br>
+            <p><strong>Indian Institute of Technology Roorkee</strong> – BS, Computer Science (2017 - 2021), GPA: 9.718/10</p>
+            <p>Chair - <a href="http://iitr.acm.org/#/">ACM IIT Roorke Chapter</a> | Co-President - <a href="https://vlgiitr.github.io/">Vision and Language Group</a></p>
+        </section>
+
+        <!-- <section class="section">
+            <h2>Miscellaneous</h2>
+            <p>Presented my paper <a href="https://link.springer.com/chapter/10.1007/978-3-030-41299-9_45">A Generative Adversarial Network Based Ensemble Technique for Automatic Evaluation of Machine Synthesized Speech</a> at the Student Academic Conference at Inter IIT Tech Meet 2019.</p>
+            <p>My hobbies include cooking and playing guitar. I am obsessed with the songs of <a href="https://open.spotify.com/artist/0tC995Rfn9k2l7nqgCZsV7">Prateek Kuhad</a> and <a href="https://open.spotify.com/artist/4gdMJYnopf2nEUcanAwstx">Anuv Jain</a>.</p>
+        </section> -->
+
+        <footer>
+            <p>Feel free to use this template from my <a href="https://github.com/ac-alpha/ac-alpha.github.io">GitHub</a>.</p>
+        </footer>
+    </div>
 </body>
 
 </html>
