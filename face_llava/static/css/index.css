@@ -155,3 +155,20 @@ body {
 #interpolation-image-wrapper img {
   border-radius: 5px;
 }
+
+.image-container {
+  display: flex;
+  justify-content: center;  /* Centers image horizontally */
+  margin-bottom: 1.5rem;    /* Spacing between images */
+}
+
+.image-container img {
+  width: 100%;  /* Default full width */
+  height: auto;
+}
+
+/* Target only the first two image containers */
+.image-container:nth-child(2) img,
+.image-container:nth-child(3) img {
+  width: 70%; /* Set 70% width for first two images */
+}
