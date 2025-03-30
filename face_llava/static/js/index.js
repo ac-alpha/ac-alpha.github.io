@@ -76,3 +76,16 @@ $(document).ready(function() {
     bulmaSlider.attach();
 
 })
+
+document.addEventListener('DOMContentLoaded', () => {
+  bulmaCarousel.attach('#data-carousel', {
+    slidesToScroll: 1,
+    slidesToShow: 1,
+    infinite: true,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    pauseOnHover: true,
+    navigation: true,
+    pagination: true,
+  });
+});

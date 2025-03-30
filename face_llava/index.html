@@ -32,7 +32,6 @@
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/images/tiktok.svg">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
@@ -62,9 +61,9 @@
 
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="https://ashutoshchaubey.in/">Ashutosh Chaubey</a></span> 
+              <a href="https://ashutoshchaubey.in/">Ashutosh Chaubey,</a></span> 
             <span class="author-block">
-              <a href="">Xulang Gu</a></span>
+              <a href="">Xulang Gu,</a></span>
             <span class="author-block">
               <a href="https://www.ihp-lab.org/">Mohammad Soleymani</a>
             </span>
@@ -154,6 +153,48 @@
   </div>
 </section>
 
+<section class="section">
+    <div class="container is-max-desktop">
+      <!-- Method. -->
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">FaceInstruct-1M</h2>
+  
+          <!-- Interpolating. -->
+          <img src="./static/images/face_llava_data_annotation_pipeline.png" class="" alt="FaceInstruct-1M Data Annotation Pipeline"/>
+          <p>
+            <br />
+            Overview of the data annotation pipeline used to construct FaceInstruct-1M dataset. We leverage existing face-analysis datasets and their annotations and prompt Gemini-1.5 flash to convert the annotations into natural language with reasoning. To ensure data quality, we rate the generated samples from GPT-4o-mini. 
+          </p>
+        <!--/ Interpolating. -->
+        </div>
+      </div>
+      <!--/ Compare. -->
+    </div>
+  </section>
+
+<section class="hero is-light is-small">
+<div class="hero-body">
+    <div class="container">
+    <h2 class="title is-3 is-centered">Data Samples</h2>
+    <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-dfew">
+            <img id="dfew" src="./static/images/data_samples/data_samples-dfew.png" alt="Samples Face Expression Recognition"/>
+        </div>
+        <div class="item item-au">
+            <img id="au" src="./static/images/data_samples/data_samples-au.png" alt="Samples Action Unit Estimation"/>
+        </div>
+        <div class="item item-ff">
+            <img  id="ff" src="./static/images/data_samples/data_samples-face_forensics.png" alt="Samples Deep Fake Detection"/>
+        </div>
+        <div class="item item-age">
+            <img  id="age" src="./static/images/data_samples/data_samples-age.png" alt="Samples Age Estimation"/>
+        </div>
+    </div>
+    </div>
+</div>
+</section>
+
 
 <section class="section">
   <div class="container is-max-desktop">
@@ -174,6 +215,7 @@
     <!--/ Compare. -->
   </div>
 </section>
+
 
 
 <!-- <section class="section" id="BibTeX">
