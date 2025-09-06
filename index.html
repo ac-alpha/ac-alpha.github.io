@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ashutosh Chaubey</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1/css/academicons.min.css">
+
     <style>
         /* Reset */
         * {
@@ -87,23 +90,43 @@
             margin: 20px 0;
         }
 
+        /* ICON LINKS: replace your existing .links a / .links a:hover rules with these */
         .links a {
-            text-decoration: underline;
-            color: #00aeff; /* Muted blue */
-            margin: 0 10px;
-            font-size: 0.95em; /* Reduced from 1em */
-            position: relative;
-            padding-bottom: 2px;
-            transition: color 0.3s, background-color 0.3s, padding 0.3s; /* Added background-color and padding transitions */
+            text-decoration: none;          /* override global underline */
+            color: #00aeff;
+            margin: 0 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 9999px;
+            padding: 0;                     /* keep icons perfectly circular */
+            transition: color 0.3s, background-color 0.3s, transform 0.2s, box-shadow 0.3s;
         }
 
         .links a:hover {
-            color: #ffffff; /* White text on hover */
-            background-color: #00aeff; /* Muted blue background on hover */
-            padding: 4px 8px; /* Increased padding for better visibility */
-            border-radius: 4px; /* Rounded corners */
-            /* Optional: Add a subtle box-shadow for depth */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            color: #ffffff;
+            background-color: #00aeff;
+            transform: translateY(-1px);
+            border-radius: 9999px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 0;                     /* override global a:hover padding */
+        }
+
+        /* NEW: make icons the right size and inherit color */
+        .links i {
+            font-size: 20px;
+            line-height: 1;
+        }
+
+        /* NEW: keep accessible labels without showing text */
+        .sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden; clip: rect(0,0,0,0);
+            white-space: nowrap; border: 0;
         }
 
         a {
@@ -291,18 +314,18 @@
                     where I am advised by <a href="https://people.ict.usc.edu/~soleymani/">Prof. Mohammad Soleymani</a> at the <a href="https://www.ihp-lab.org/">Intelligent Human Perception Lab</a>. 
                     I am a <i>Bronze Medallist</i> from the 2021 batch of <a href="https://www.iitr.ac.in/">Indian Institute of Technology, Roorkee</a>.</p>
 
-                
+                <p>During my PhD, I am working on <b>post-training techniques</b> such as preference optimization for <b>multimodal (audio and video) LLMs</b> to improve their <b>social and emotion understanding</b>.
+                    I also collaborate on projects related to <b>video generation using diffusion for social behaviors</b>.
+                </p>
                 <p>Prior to this, I was a Founding Research Engineer at <a href="https://www.anoki.ai/">Anoki AI</a> where I worked on <b>multimodal content understanding and retrieval</b>. 
                 I have also worked at <a href="https://lgads.tv/">LG Ad Solutions</a> 
                 on <b>speaker recognition, automatic content recognition using audio and voice cloning</b>.
                 Over the past I have interned at <a href="https://research.adobe.com/">Adobe Research</a>, 
-                where I worked with <a href="https://scholar.google.com/citations?user=Dluf41wAAAAJ&hl=en">Dr. Sumit Shekhar</a> 
-                on active learning for content labelling in documents. 
-                I have also interned at <a href="https://val.cds.iisc.ac.in/">Video Analytics Lab, IISc. Bengaluru</a> 
-                where I worked with <a href="https://scholar.google.co.in/citations?user=cVg7HrEAAAAJ&hl=en">Prof. R. Venkatesh Babu</a> 
-                on human pose estimation from a single RGB image. Back at my undergraduate college, 
-                I worked with <a href="https://scholar.google.co.in/citations?user=QU2O6JMAAAAJ&hl=en">Prof. R. Balasubramanian</a> 
-                on automatic evaluation of machine synthesized speech.</p>
+                 with <a href="https://scholar.google.com/citations?user=Dluf41wAAAAJ&hl=en">Sumit Shekhar</a>, 
+                 at <a href="https://val.cds.iisc.ac.in/">Vision and AI Lab, IISc. Bengaluru</a> 
+                 with <a href="https://scholar.google.co.in/citations?user=cVg7HrEAAAAJ&hl=en">Prof. R. Venkatesh Babu</a>, 
+                 and at IIT Roorkee with <a href="https://scholar.google.co.in/citations?user=QU2O6JMAAAAJ&hl=en">Prof. R. Balasubramanian</a> 
+                </p>
                 <p>I am always eager to collaborate on research with people in academia as well as industry. Please reach out to <a href="mailto:achaubey@usc.edu">achaubey@usc.edu</a> to discuss potential collaborations.</p>
                 <!-- <p><strong>Currently, I am looking for Research/Applied Scientist internship positions for Summer 2025.</strong> Please <a href="mailto:achaubey@usc.edu">reach out</a> if you have open positions.</p> -->
                 
@@ -320,12 +343,23 @@
             <div class="about-image">
                 <img src="imgs/self_portrait_taipei.png" alt="Ashutosh Chaubey">
                 <section class="links">
-                    <a href="mailto:ashutoshchaubey2999@gmail.com">Email</a>
-                    <a href="misc_data/Ashutosh_Chaubey_CV_latest.pdf">Resume</a>
-                    <a href="https://scholar.google.com/citations?user=8g_xYb0AAAAJ&hl=en&authuser=1">Google Scholar</a>
-                    <a href="https://www.linkedin.com/in/ashutosh-chaubey/">LinkedIn</a>
-                    <a href="https://github.com/ac-alpha/">GitHub</a>
+                <a href="mailto:ashutoshchaubey2999@gmail.com" aria-label="Email">
+                    <i class="fa-solid fa-envelope"></i><span class="sr-only">Email</span>
+                </a>
+                <a href="misc_data/Ashutosh_Chaubey_CV_latest.pdf" aria-label="Resume">
+                    <i class="ai ai-cv"></i><span class="sr-only">Resume</span>
+                </a>
+                <a href="https://scholar.google.com/citations?user=8g_xYb0AAAAJ&hl=en&authuser=1" aria-label="Google Scholar">
+                    <i class="ai ai-google-scholar"></i><span class="sr-only">Google Scholar</span>
+                </a>
+                <a href="https://www.linkedin.com/in/ashutosh-chaubey/" aria-label="LinkedIn">
+                    <i class="fa-brands fa-linkedin"></i><span class="sr-only">LinkedIn</span>
+                </a>
+                <a href="https://github.com/ac-alpha/" aria-label="GitHub">
+                    <i class="fa-brands fa-github"></i><span class="sr-only">GitHub</span>
+                </a>
                 </section>
+
                 <div>
                     <b><u>Areas of Interest</u></b> <p>Multimodal LLM Tuning and Post-training, Emotion understanding, Social AI</p>
                 </div>
@@ -333,42 +367,44 @@
             </div>
         </section>
 
-
         <section class="section">
             <h2>News</h2>
-            <ul>
-                <li>Aug '25 - One paper accepted at <a href="https://2025.emnlp.org/">EMNLP 2025 (Findings)</a>. Preprint releasing soon.</li>
-                <li>Jun '25 - <a href="https://cv.maxi.su/DiTaiListener/">DiTaiListener</a> accepted at <a href="https://iccv.thecvf.com/">ICCV 2025</a>! See you in Hawaai!</li>
-                <li>Oct '24 - One paper accepted at <a href="https://wacv2025.thecvf.com/">WACV 2025</a>!. Congrats to my previous team at Anoki AI!
-                <li>Aug '24 - I joined the <a href="https://www.ihp-lab.org/">Intelligent Human Perception Lab</a> @ <a href="https://ict.usc.edu/">Institute for Creative Technologies, USC</a>.</li>
-                <li>Apr '24 - I will be starting my PhD @ <a href="https://www.usc.edu/">University of Southern California</a> starting this Fall. Fight on!</li>
-                <li>Sep '23 - One paper has been accepted at <a href="http://www.asru2023.org/">ASRU, 2023</a>. See you in Taipei!</li>
-                <li>Apr '23 - I have joined <a href="https://www.anoki.ai/">Anoki AI</a> as a Founding Research Engineer.</li>
-                <li>Sep '22 - I will be at <a href="https://www.interspeech2022.org/">Interspeech 2022</a> at Incheon, Korea.</li>
-                <li>Jun '22 - One paper has been accepted at <a href="https://www.interspeech2022.org/">Interspeech 2022</a>!</li>
-                <li>Jul '21 - I have started my industry experience by joining <a href="https://lgads.tv/">LG Ad Solutions</a> as a Data Scientist. On to new challenges!</li>
-            </ul>
+                <div style="overflow-y: auto; max-height: 250px;">
+                <ul>
+                    <li>Sep '25 - <a href="https://face-llava.github.io/">Face-LLaVA</a> accepted at <a href="https://wacv.thecvf.com/">WACV 2026</a> in Round-1 early acceptance. See you in Tucson!</li>
+                    <li>Aug '25 - One paper accepted at <a href="https://2025.emnlp.org/">EMNLP 2025 (Findings)</a>. Preprint available <a href="https://arxiv.org/abs/2508.18297">here</a>.</li>
+                    <li>Jun '25 - <a href="https://cv.maxi.su/DiTaiListener/">DiTaiListener</a> accepted at <a href="https://iccv.thecvf.com/">ICCV 2025</a>. See you in Hawaai!</li>
+                    <li>Oct '24 - One paper accepted at <a href="https://wacv2025.thecvf.com/">WACV 2025</a>! Congrats to my previous team at Anoki AI!</li>
+                    <li>Aug '24 - I joined the <a href="https://www.ihp-lab.org/">Intelligent Human Perception Lab</a> @ <a href="https://ict.usc.edu/">Institute for Creative Technologies, USC</a>.</li>
+                    <li>Apr '24 - I will be starting my PhD @ <a href="https://www.usc.edu/">University of Southern California</a> starting this Fall. Fight on!</li>
+                    <li>Sep '23 - One paper has been accepted at <a href="http://www.asru2023.org/">ASRU, 2023</a>. See you in Taipei!</li>
+                    <li>Apr '23 - I have joined <a href="https://www.anoki.ai/">Anoki AI</a> as a Founding Research Engineer.</li>
+                    <li>Sep '22 - I will be at <a href="https://www.interspeech2022.org/">Interspeech 2022</a> at Incheon, Korea.</li>
+                    <li>Jun '22 - One paper has been accepted at <a href="https://www.interspeech2022.org/">Interspeech 2022</a>!</li>
+                    <li>Jul '21 - I have started my industry experience by joining <a href="https://lgads.tv/">LG Ad Solutions</a> as a Data Scientist. On to new challenges!</li>
+                </ul>
+                </div>
         </section>
+        
 
         <section class="section">
             <h2>Research & Publications</h2>
-            <h3>Preprints</h3>
+            <!-- <h3>Preprints</h3> -->
+
+            <h3>Published Work</h3>
             <div class="publication">
                 <h3>Face-LLaVA: Facial Expression and Attribute Understanding through Instruction Tuning</h3>
                 <p><strong>Ashutosh Chaubey</strong>, <a href="https://www.linkedin.com/in/xulang-guan-3040a6268/">Xulang Guan</a>, <a href="https://www.ihp-lab.org/">Mohammad Soleymani</a></p>
-                <p><em>Under review</em></p>
+                <p><em>WACV</em>, 2026 (Round 1 early - 6.4% acceptance)</p>
                 <p><a href="https://arxiv.org/abs/2504.07198">Preprint</a> / <a href="https://face-llava.github.io/">Project Page</a></p>
                 <p>Proposed a novel MLLM with a visual encoder to encode rich face region features based on face landmarks. Collected FaceInstruct-1M dataset with over one million samples for instruction tuning a MLLM.</p>
             </div>
 
-            
-
-            <h3>Published Work</h3>
             <div class="publication">
                 <h3>Can VLMs Recall Factual Associations From Visual References?</h3>
                 <p><a href = "https://dhananjayashok.github.io/">Dhananjay Ashok</a>, <strong>Ashutosh Chaubey</strong>, <a href = "https://hironaarai.com/">Hirona Arai</a>, <a href = "https://scholar.google.com/citations?hl=en&user=tmK5EPEAAAAJ">Jonathan May</a>, <a href = "https://jessethomason.com/">Jesse Thomason</a></p>
                 <p><em>EMNLP</em>, 2025 (Findings)</p>
-                <p><a href="">Preprint (Coming Soon!)</a> </p>
+                <p><a href="https://arxiv.org/abs/2508.18297">Preprint</a> </p>
                 <p>Tested VLMs' ability to recall factual knowledge about entities (CIFAR classes, Food101 classes, and Geo-Landmarks) to test the vision-language alignment in them.</p>
             </div>
             <div class="publication">
@@ -382,7 +418,7 @@
             <div class="publication">
                 <h3>ContextIQ: A Multimodal Expert-Based Video Retrieval System for Contextual Advertising</h3>
                 <p><strong>Ashutosh Chaubey</strong>, <a href="https://www.linkedin.com/in/anoubhav/">Anoubhav Agarwaal</a>, <a href="https://www.linkedin.com/in/sartaki-sinha-roy-2aa3a514b/">Sartaki Sinha Roy</a>, <a href="https://www.linkedin.com/in/aagrawal52/">Aayush Agrawal</a>, <a href="https://www.linkedin.com/in/susmitaghose/">Susmita Ghose</a></p>
-                <p><em>IEEE/CVF WACV</em>, 2025</p>
+                <p><em>WACV</em>, 2025</p>
                 <p><a href="https://openaccess.thecvf.com/content/WACV2025/html/Chaubey_ContextIQ_A_Multimodal_Expert-Based_Video_Retrieval_System_for_Contextual_Advertising_WACV_2025_paper.html">Paper</a> / <a href="https://drive.google.com/file/d/1nzWWVVECsd1NaueNDsJt3X869eyLUD5d/view?usp=sharing">Poster</a> / <a href="misc_data/contextiq.bib">Cite</a> </p>
                 <p>Proposed ContextIQ, a novel framework for video retrieval for contextual advertising using a mixture of multimodal experts.</p>
             </div>
