@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="CSCI698 — Course site" />
+    <title>CSCI698 — Course</title>
+
+    <!-- Replace with your own stylesheet -->
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Favicons (optional) -->
+    <link rel="icon" href="favicon.ico" />
+</head>
+<body>
+    <a class="skip-link" href="#content">Skip to content</a>
+
+    <header>
+        <div class="container">
+            <h1>CSCI698</h1>
+            <p class="tagline">Advanced Topics in Computer Science</p>
+
+            <nav aria-label="Main navigation">
+                <ul class="nav">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#schedule">Schedule</a></li>
+                    <li><a href="#assignments">Assignments</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="content" class="container">
+        <section id="about">
+            <h2>About</h2>
+            <p>Course description and goals. Replace this text with a brief overview of the course.</p>
+        </section>
+
+        <section id="schedule">
+            <h2>Schedule</h2>
+            <p>Weekly topics, readings, and important dates.</p>
+            <ul>
+                <li>Week 1 — Introduction</li>
+                <li>Week 2 — Topic A</li>
+                <li>Week 3 — Topic B</li>
+            </ul>
+        </section>
+
+        <section id="assignments">
+            <h2>Assignments</h2>
+            <p>Links to assignments, submission instructions, and grading policy.</p>
+            <ol>
+                <li><a href="#">Assignment 1</a></li>
+                <li><a href="#">Assignment 2</a></li>
+            </ol>
+        </section>
+
+        <section id="resources">
+            <h2>Resources</h2>
+            <p>Lecture slides, readings, and external links.</p>
+            <ul>
+                <li><a href="#">Syllabus (PDF)</a></li>
+                <li><a href="#">Lecture notes</a></li>
+            </ul>
+        </section>
+
+        <section id="contact">
+            <h2>Contact</h2>
+            <p>Instructor: <strong>Instructor Name</strong></p>
+            <p>Email: <a href="mailto:instructor@example.edu">instructor@example.edu</a></p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="year"></span> CSCI698 — Department Name. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // small utility: set current year
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
