@@ -28,8 +28,8 @@
             line-height: 1.7;
             padding: 0;
             font-size: 16px;
-            overflow-x: hidden;
             position: relative;
+            margin: 0;
         }
 
         /* Scroll progress indicator */
@@ -86,6 +86,7 @@
             background-color: rgba(255, 255, 255, 0.95);
             box-shadow: 0 0 40px rgba(0, 0, 0, 0.05);
             min-height: 100vh;
+            box-sizing: border-box;
         }
 
         header {
@@ -502,6 +503,9 @@
             display: flex;
             gap: 20px;
             align-items: center;
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 100%;
         }
 
         .publication.highlighted {
@@ -588,6 +592,9 @@
             flex: 1;
             min-width: 0;
             position: relative;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            max-width: 100%;
         }
 
         .publication h3 {
@@ -597,6 +604,8 @@
             margin-bottom: 10px;
             font-weight: 500;
             line-height: 1.4;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .publication p {
@@ -959,8 +968,15 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            body {
+                overflow-x: hidden;
+            }
+
             .container {
-                padding: 0 20px;
+                padding: 0 15px;
+                width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
             }
 
             header {
@@ -991,14 +1007,47 @@
             }
 
             .publication {
-                padding: 20px;
+                padding: 15px;
                 flex-direction: column;
+                width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
+                display: flex !important;
             }
 
             .publication-image {
                 width: 100%;
                 max-width: 200px;
                 margin: 0 auto 15px;
+                flex-shrink: 0;
+            }
+
+            .publication-content {
+                width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+
+            .publication h3 {
+                font-size: 1.2em;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+
+            .publication p {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+
+            .publication-venue-links {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+
+            .publication-venue-links a {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                display: inline-block;
             }
 
             .publication-venue {
@@ -1008,6 +1057,10 @@
 
             .publication-venue-info {
                 margin-bottom: 8px;
+                min-width: 0;
+                width: 100%;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
             }
 
             .publication-venue-links {
