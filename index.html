@@ -16,105 +16,194 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #ffffff;
-            color: #555; /* Softer gray for body text */
-            line-height: 1.6;
-            padding: 20px;
-            font-size: 0.95em; /* Reduced from 1em */
+            font-family: 'Georgia', 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);
+            background-attachment: fixed;
+            color: #333;
+            line-height: 1.7;
+            padding: 0;
+            font-size: 16px;
+            overflow-x: hidden;
         }
 
         .container {
-            max-width: 900px;
-            margin: auto;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 30px;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.05);
+            min-height: 100vh;
         }
 
         header {
             text-align: center;
-            padding: 20px 0;
-            border-bottom: 1px solid #ddd; /* Soft divider color */
+            padding: 40px 0 25px;
+            border-bottom: 2px solid #e8e8e8;
+            position: relative;
+            background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.98) 100%);
+            margin-bottom: 0;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #2563eb, #3b82f6);
+            border-radius: 2px;
         }
 
         header h1 {
-            font-size: 2.2em; /* Reduced from 2.5em */
-            color: #242424; /* Dark teal for main header */
+            font-size: 2.8em;
+            color: #1a1a1a;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+            margin-bottom: 10px;
+            opacity: 0;
+            animation: fadeInDown 0.8s ease-out 0.2s forwards;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
         }
 
         .about-section {
             display: flex;
             flex-wrap: wrap;
-            margin: 40px 0;
-            align-items: center;
+            margin: 30px 0;
+            align-items: flex-start;
+            gap: 30px;
+            padding: 20px 0;
         }
 
         .about-text {
             flex: 2;
-            padding: 20px;
+            padding: 0;
+            min-width: 300px;
         }
 
         .about-text h2 {
-            font-size: 1.8em; /* Reduced from 2em */
-            color: #242424; /* Slightly muted teal */
-            margin-bottom: 10px;
+            font-size: 1.9em;
+            color: #1a1a1a;
+            margin-bottom: 15px;
+            font-weight: 400;
+            letter-spacing: -0.3px;
+            position: relative;
+            padding-bottom: 8px;
+        }
+
+        .about-text h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, #2563eb, #3b82f6);
         }
 
         .about-text p {
-            margin-bottom: 15px;
-            font-size: 1em; /* Reduced from 1.1em */
-            color: #555; /* Softer gray */
+            margin-bottom: 12px;
+            font-size: 1.05em;
+            color: #444;
+            text-align: justify;
+            line-height: 1.7;
         }
 
-        .about-text em
-        {
+        .about-text em {
             margin-bottom: 5px;
-            font-size: 1.2em; /* Reduced from 1.1em */
-            color: #000000; /* Softer gray */
+            font-size: 1.15em;
+            color: #1a1a1a;
+            font-style: normal;
+            font-weight: 500;
         }
 
         .about-image {
             flex: 1;
             text-align: center;
-            padding: 20px;
+            padding: 0;
+            position: sticky;
+            top: 30px;
         }
 
         .about-image img {
             max-width: 100%;
             height: auto;
-            /* border-radius: 8px;
-            border: 1px solid #ccc; */
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: #fff;
+            padding: 5px;
+        }
+
+        .about-image img:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
         }
 
         .links {
             text-align: center;
-            margin: 20px 0;
+            margin: 18px 0;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
         }
 
-        /* ICON LINKS: replace your existing .links a / .links a:hover rules with these */
         .links a {
-            text-decoration: none;          /* override global underline */
-            color: #00aeff;
-            margin: 0 6px;
+            text-decoration: none;
+            color: #2563eb;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 9999px;
-            padding: 0;                     /* keep icons perfectly circular */
-            transition: color 0.3s, background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            padding: 0;
+            background: rgba(37, 99, 235, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(37, 99, 235, 0.1);
         }
 
         .links a:hover {
             color: #ffffff;
-            background-color: #00aeff;
-            transform: translateY(-1px);
-            border-radius: 9999px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            padding: 0;                     /* override global a:hover padding */
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+            border-color: transparent;
         }
 
-        /* NEW: make icons the right size and inherit color */
         .links i {
             font-size: 20px;
             line-height: 1;
@@ -130,85 +219,127 @@
         }
 
         a {
-            text-decoration: underline;
-            color: #00aeff; /* Muted blue */
-            margin: 0px;
-            font-size: 0.95em; /* Reduced from 1em */
+            text-decoration: none;
+            color: #2563eb;
+            margin: 0;
+            font-size: inherit;
             position: relative;
             padding-bottom: 2px;
-            transition: color 0.3s, background-color 0.3s, padding 0.3s; /* Added background-color and padding transitions */
+            border-bottom: 1px solid rgba(37, 99, 235, 0.3);
+            transition: all 0.3s ease;
+            font-weight: 500;
         }
 
         a:hover {
-            color: #ffffff; /* White text on hover */
-            background-color: #00aeff; /* Muted blue background on hover */
-            padding: 4px 8px; /* Increased padding for better visibility */
-            border-radius: 4px; /* Rounded corners */
-            /* Optional: Add a subtle box-shadow for depth */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            color: #1e40af;
+            border-bottom-color: #2563eb;
+            border-bottom-width: 2px;
+        }
+
+        .links a,
+        footer a {
+            border-bottom: none;
         }
 
         .summary-section {
-            margin: 40px 0;
+            margin: 20px 0;
         }
 
         .accordion {
-            background-color: #f9f9f9; /* Light background for distinction */
-            padding: 15px;
-            border-radius: 5px;
-            /* border: 1px solid #ddd; Soft border */
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 15px 20px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+        }
+
+        .accordion:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-color: #d1d5db;
         }
 
         .accordion summary {
-            font-size: 1.0em; /* Consistent with section headings */
-            color: #000000; /* Same color as other headings */
+            font-size: 1.05em;
+            color: #1a1a1a;
             cursor: pointer;
             outline: none;
             position: relative;
             padding: 5px 0;
-            list-style: none; /* Remove default marker */
+            list-style: none;
+            font-weight: 500;
+            user-select: none;
         }
 
         .accordion summary::-webkit-details-marker {
-            display: none; /* Remove default disclosure triangle */
+            display: none;
         }
 
         .accordion summary::before {
-            content: '▸'; /* Custom marker */
+            content: '▸';
             display: inline-block;
-            margin-right: 10px;
-            transition: transform 0.3s ease;
+            margin-right: 12px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #2563eb;
+            font-size: 1.1em;
         }
 
         .accordion[open] summary::before {
-            transform: rotate(90deg); /* Rotate marker when open */
+            transform: rotate(90deg);
         }
 
         .accordion .content {
             max-height: 0;
             opacity: 0;
-            transition: max-height 0.3s ease, opacity 0.3s ease;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, margin-top 0.3s ease;
             overflow: hidden;
         }
 
         .accordion[open] .content {
-            max-height: 500px; /* Arbitrary large value to accommodate content */
+            max-height: 500px;
             opacity: 1;
-            margin-top: 10px;
+            margin-top: 12px;
+        }
+
+        .accordion .content p {
+            color: #555;
+            line-height: 1.7;
         }
 
         .section {
-            margin: 40px 0;
+            margin: 35px 0;
+            padding: 20px 0;
         }
 
         .section h2 {
-            font-size: 1.8em; /* Reduced from 2em */
-            margin-bottom: 15px;
-            color: #242424; /* Consistent teal for section headings */
-            border-bottom: 2px solid #ddd; /* Light divider */
-            padding-bottom: 5px;
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+            position: relative;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, #2563eb, #3b82f6);
+        }
+
+        .section h3 {
+            font-size: 1.4em;
+            color: #1a1a1a;
+            margin: 20px 0 15px;
+            font-weight: 400;
+            letter-spacing: -0.3px;
         }
 
         .section ul {
@@ -218,85 +349,509 @@
 
         .section ul li {
             margin-bottom: 10px;
-            font-size: 1em; /* Reduced from 1.1em */
+            font-size: 1.05em;
             position: relative;
-            padding-left: 20px;
+            padding-left: 25px;
+            line-height: 1.6;
+            color: #444;
         }
 
         .section ul li::before {
-            content: "•";
+            content: "▸";
             position: absolute;
             left: 0;
-            color: #777; /* Soft gray bullet */
+            color: #2563eb;
+            font-weight: bold;
         }
 
         .interests h2 {
-            font-size: 1.2em; /* Reduced from 2em */
+            font-size: 1.4em;
             margin-bottom: 15px;
-            color: #242424; /* Consistent teal for section headings */
-            border-bottom: 2px solid #ddd; /* Light divider */
+            color: #1a1a1a;
+            border-bottom: 2px solid #e5e7eb;
             padding-bottom: 5px;
         }
 
         .publication {
             margin-bottom: 25px;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .publication.highlighted {
+            border: 2px solid #f59e0b;
+            background: linear-gradient(135deg, #fffbeb 0%, #ffffff 100%);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
+        }
+
+        .publication.highlighted::before {
+            opacity: 1;
+            background: linear-gradient(180deg, #f59e0b, #f97316);
+            width: 5px;
+        }
+
+        .publication.highlighted:hover {
+            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.25);
+            border-color: #f97316;
+        }
+
+        .publication::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #2563eb, #3b82f6);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .publication:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            transform: translateX(5px);
+            border-color: #cbd5e1;
+        }
+
+        .publication:hover::before {
+            opacity: 1;
+        }
+
+        .publication-image {
+            flex-shrink: 0;
+            width: 150px;
+            min-width: 150px;
+        }
+
+        .publication-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .publication:hover .publication-image img {
+            transform: scale(1.02);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .publication-content {
+            flex: 1;
+            min-width: 0;
+            position: relative;
         }
 
         .publication h3 {
-            font-size: 1.3em; /* Reduced from 1.5em */
-            color: #242424;
-            margin-top: 20px;
+            font-size: 1.35em;
+            color: #1a1a1a;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-weight: 500;
+            line-height: 1.4;
         }
 
         .publication p {
             margin-bottom: 8px;
-            font-size: 0.95em; /* Reduced from 1em */
+            font-size: 1em;
             color: #555;
+            line-height: 1.6;
+        }
+
+        .publication p em {
+            color: #2563eb;
+            font-style: normal;
+            font-weight: 500;
+        }
+
+        .publication-venue {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .publication-venue-info {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .publication-venue-info em a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(37, 99, 235, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .publication-venue-info em a:hover {
+            color: #1e40af;
+            border-bottom-color: #2563eb;
+            border-bottom-width: 2px;
+        }
+
+        .publication-venue-links {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .publication-venue-links a {
+            white-space: nowrap;
+        }
+
+        /* Tag Filter System */
+        .tag-filter-container {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .tag-filter-container h4 {
+            font-size: 1.1em;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .tag-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag-filter-btn {
+            padding: 8px 16px;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 20px;
+            font-size: 0.9em;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            user-select: none;
+        }
+
+        .tag-filter-btn:hover {
+            background: #f1f5f9;
+            border-color: #94a3b8;
+            transform: translateY(-1px);
+        }
+
+        .tag-filter-btn.active {
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            color: #ffffff;
+            border-color: #2563eb;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+        }
+
+        .tag-filter-btn.active:hover {
+            background: linear-gradient(135deg, #1e40af, #2563eb);
+            transform: translateY(-1px);
+        }
+
+        /* Publication Tags */
+        .publication-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        .publication-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 500;
+            border: 1px solid;
+        }
+
+        /* Different colors for different tags */
+        .publication-tag.tag-cv {
+            background: rgba(37, 99, 235, 0.1);
+            color: #2563eb;
+            border-color: rgba(37, 99, 235, 0.2);
+        }
+
+        .publication-tag.tag-multimodal-llms {
+            background: rgba(236, 72, 153, 0.1);
+            color: #ec4899;
+            border-color: rgba(236, 72, 153, 0.2);
+        }
+
+        .publication-tag.tag-rl {
+            background: rgba(245, 158, 11, 0.1);
+            color: #f59e0b;
+            border-color: rgba(245, 158, 11, 0.2);
+        }
+
+        .publication-tag.tag-audio {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+            border-color: rgba(34, 197, 94, 0.2);
+        }
+
+        .publication-tag.tag-face {
+            background: rgba(168, 85, 247, 0.1);
+            color: #a855f7;
+            border-color: rgba(168, 85, 247, 0.2);
+        }
+
+        .publication-tag.tag-video {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            border-color: rgba(239, 68, 68, 0.2);
+        }
+
+        .publication-tag.tag-highlight {
+            background: rgba(245, 158, 11, 0.15);
+            color: #d97706;
+            border-color: rgba(245, 158, 11, 0.3);
+            font-weight: 600;
+        }
+
+        /* Highlight badge - Star icon */
+        .publication-highlight-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f59e0b, #f97316);
+            color: #ffffff;
+            border-radius: 50%;
+            font-size: 16px;
+            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.4);
+            z-index: 2;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .publication-highlight-badge:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.5);
+        }
+
+        .publication-highlight-badge i {
+            line-height: 1;
+        }
+
+        /* Education with logos */
+        .education-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .education-logo {
+            flex-shrink: 0;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .education-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .education-content {
+            flex: 1;
+        }
+
+        /* Hide publications when filtered */
+        .publication.hidden {
+            display: none;
         }
 
 
         footer {
             text-align: center;
-            padding: 20px;
+            padding: 30px 20px;
             color: #777;
             margin-top: 40px;
-            border-top: 1px solid #ddd; /* Soft divider */
-            font-size: 0.9em; /* Reduced from 1em */
+            border-top: 2px solid #e5e7eb;
+            font-size: 0.95em;
+            background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(249,250,251,1) 100%);
         }
 
         footer a {
-            color: #777;
+            color: #2563eb;
             text-decoration: none;
-            border-bottom: 1px solid #ccc;
-            transition: color 0.3s, background-color 0.3s, padding 0.3s; /* Added background-color and padding transitions */
+            border-bottom: 1px solid rgba(37, 99, 235, 0.3);
+            transition: all 0.3s ease;
+            font-weight: 500;
         }
 
         footer a:hover {
-            color: #ffffff; /* White text on hover */
-            background-color: #000000; /* Muted blue background on hover */
-            padding: 4px 8px; /* Increased padding for better visibility */
-            border-radius: 4px; /* Rounded corners */
-            /* Optional: Add a subtle box-shadow for depth */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            color: #1e40af;
+            border-bottom-color: #2563eb;
+            border-bottom-width: 2px;
         }
 
-        /* Page View Counter Styling */
         .page-view-counter {
             text-align: center;
             margin: 20px 0;
             font-size: 1em;
-            color: #34495e;
+            color: #6b7280;
         }
 
+        /* News section styling */
+        .news-container {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 18px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .news-container ul {
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .news-container ul::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .news-container ul::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .news-container ul::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+
+        .news-container ul::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Areas of Interest */
+        .about-image > div {
+            margin-top: 18px;
+            padding: 15px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .about-image > div b {
+            color: #1a1a1a;
+            font-size: 1.1em;
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .about-image > div p {
+            color: #555;
+            font-size: 0.95em;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            header {
+                padding: 40px 0 30px;
+            }
+
+            header h1 {
+                font-size: 2.2em;
+            }
+
             .about-section {
                 flex-direction: column;
+                gap: 30px;
+            }
+
+            .about-image {
+                position: static;
             }
 
             .about-text,
             .about-image {
-                padding: 10px;
+                padding: 0;
             }
+
+            .section {
+                margin: 25px 0;
+                padding: 15px 0;
+            }
+
+            .publication {
+                padding: 20px;
+                flex-direction: column;
+            }
+
+            .publication-image {
+                width: 100%;
+                max-width: 200px;
+                margin: 0 auto 15px;
+            }
+
+            .publication-venue {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .publication-venue-info {
+                margin-bottom: 8px;
+            }
+
+            .publication-venue-links {
+                width: 100%;
+            }
+
+            .education-item {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .education-logo {
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        /* Smooth scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -307,7 +862,7 @@
     </header>
 
     <div class="container">
-        <section class="about-section">
+        <section class="about-section fade-in">
             <div class="about-text">
                 <h2>About Me</h2>
                 <p>I am a CS PhD student at the <a href="https://ict.usc.edu/">Institute for Creative Technologies</a>, <a href="https://www.usc.edu/">University of Southern California</a>, 
@@ -341,7 +896,7 @@
 
             </div>
             <div class="about-image">
-                <img src="imgs/self_portrait_taipei.png" alt="Ashutosh Chaubey">
+                <img src="imgs/self_portrait_india_munnar.jpg" alt="Ashutosh Chaubey">
                 <section class="links">
                 <a href="mailto:ashutoshchaubey2999@gmail.com" aria-label="Email">
                     <i class="fa-solid fa-envelope"></i><span class="sr-only">Email</span>
@@ -367,9 +922,9 @@
             </div>
         </section>
 
-        <section class="section">
+        <section class="section reveal">
             <h2>News</h2>
-                <div style="overflow-y: auto; max-height: 250px;">
+                <div class="news-container">
                 <ul>
                     <li>Dec '25 - LibreFace 2.0 accepted at the International Conference on Automatic Face and Gesture Recognition (FG) 2026. See you in Kyoto! <img src="imgs/new.gif" height="25"></li>
                     <li>Sep '25 - <a href="https://face-llava.github.io/">Face-LLaVA</a> accepted at <a href="https://wacv.thecvf.com/">WACV 2026</a> in Round-1 early acceptance. See you in Tucson! <img src="imgs/new.gif" height="25"></li>
@@ -388,98 +943,253 @@
         </section>
         
 
-        <section class="section">
+        <section class="section reveal">
             <h2>Research & Publications</h2>
             <!-- <h3>Preprints</h3> -->
 
-            <h3>Published Work</h3>
-            <div class="publication">
-                <h3>LibreFace 2.0 : Leveraging Large-Scale Synthetic Data for Fair and Generalizable Facial Analysis</h3>
-                <p><a href="https://www.linkedin.com/in/xulang-guan-3040a6268/">Xulang Guan*</a>, <strong>Ashutosh Chaubey*</strong>, <a href = "https://cv.maxi.su/">Maksim Siniukov</a>, Belle Hsieh, Zongjian Li, <a href="https://www.ihp-lab.org/">Mohammad Soleymani</a></p>
-                <p><em>FG</em>, 2026 (Round 1 early)</p>
-                <p><a href="">Preprint (Soon!)</a> / <a href="https://github.com/ihp-lab/LibreFace">Code</a></p>
-                <p>Proposed an enhanced toolkit for real-time facial analysis including tasks such as facial expression recognition, action unit detection and gaze estimation.</p>
+            <!-- <h3>Published Work</h3> -->
+            
+            <div class="tag-filter-container">
+                <h4>Filter by Tags:</h4>
+                <div class="tag-filters" id="tagFilters">
+                    <!-- Tags will be dynamically generated -->
+                </div>
+            </div>
+            <div class="publication reveal" data-tags="Computer Vision, Face Analysis">
+                <!-- <!-- Optional: Add image here -->
+                <div class="publication-image">
+                    <img src="imgs/libreface_logo.png" alt="LibreFace 2.0 logo">
+                </div>
+                <!-- -->
+                <div class="publication-content">
+                    <h3>LibreFace 2.0 : Leveraging Large-Scale Synthetic Data for Fair and Generalizable Facial Analysis</h3>
+                    <p><a href="https://www.linkedin.com/in/xulang-guan-3040a6268/">Xulang Guan*</a>, <strong>Ashutosh Chaubey*</strong>, <a href = "https://cv.maxi.su/">Maksim Siniukov</a>, Belle Hsieh, Zongjian Li, <a href="https://www.ihp-lab.org/">Mohammad Soleymani</a></p>
+                    <div class="publication-venue">
+                        <div class="publication-venue-info"><em><a href="https://fg2026.ieee-biometric.org/" target="_blank">FG</a></em>, 2026 (Round 1 early)</div>
+                        <div class="publication-venue-links">
+                            <a href="">Preprint (Soon!)</a> / <a href="https://github.com/ihp-lab/LibreFace">Code</a>
+                        </div>
+                    </div>
+                    <div class="publication-tags">
+                        <span class="publication-tag tag-cv">Computer Vision</span>
+                        <span class="publication-tag tag-face">Face Analysis</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="publication">
-                <h3>Face-LLaVA: Facial Expression and Attribute Understanding through Instruction Tuning</h3>
-                <p><strong>Ashutosh Chaubey</strong>, <a href="https://www.linkedin.com/in/xulang-guan-3040a6268/">Xulang Guan</a>, <a href="https://www.ihp-lab.org/">Mohammad Soleymani</a></p>
-                <p><em>WACV</em>, 2026 (Round 1 early - 6.4% acceptance)</p>
-                <p><a href="https://arxiv.org/abs/2504.07198">Preprint</a> / <a href="https://github.com/ihp-lab/Face-LLaVA">Code</a> / <a href="https://huggingface.co/chaubeyG/FaceLLaVA">Weights</a> / <a href="https://face-llava.github.io/">Project Page</a></p>
-                <p>Proposed a novel MLLM with a visual encoder to encode rich face region features based on face landmarks. Collected FaceInstruct-1M dataset with over one million samples for instruction tuning a MLLM.</p>
+            <div class="publication reveal" data-tags="Multimodal LLMs, Computer Vision, Face Analysis, Highlight">
+                <!-- Optional: Add image here -->
+                <div class="publication-image">
+                    <img src="imgs/facellava_logo.png" alt="Face-LLaVA logo">
+                </div>
+               
+                <div class="publication-content">
+                    <h3>Face-LLaVA: Facial Expression and Attribute Understanding through Instruction Tuning</h3>
+                    <p><strong>Ashutosh Chaubey</strong>, <a href="https://www.linkedin.com/in/xulang-guan-3040a6268/">Xulang Guan</a>, <a href="https://www.ihp-lab.org/">Mohammad Soleymani</a></p>
+                    <div class="publication-venue">
+                        <div class="publication-venue-info"><em><a href="https://wacv.thecvf.com/" target="_blank">WACV</a></em>, 2026 (Round 1 - 6.4% accept.)</div>
+                        <div class="publication-venue-links">
+                            <a href="https://arxiv.org/abs/2504.07198">Preprint</a> / <a href="https://github.com/ihp-lab/Face-LLaVA">Code</a> / <a href="https://huggingface.co/chaubeyG/FaceLLaVA">Weights</a> / <a href="https://huggingface.co/datasets/chaubeyG/FaceInstruct1M/">Dataset</a> / <a href="https://face-llava.github.io/">Project Page</a>
+                        </div>
+                    </div>
+                    <div class="publication-tags">
+                        <span class="publication-tag tag-multimodal-llms">Multimodal LLMs</span>
+                        <span class="publication-tag tag-cv">Computer Vision</span>
+                        <span class="publication-tag tag-face">Face Analysis</span>
+                        <!-- <span class="publication-tag tag-highlight">Highlight</span> -->
+                    </div>
+                </div>
             </div>
 
-            <div class="publication">
-                <h3>Can VLMs Recall Factual Associations From Visual References?</h3>
-                <p><a href = "https://dhananjayashok.github.io/">Dhananjay Ashok</a>, <strong>Ashutosh Chaubey</strong>, <a href = "https://hironaarai.com/">Hirona Arai</a>, <a href = "https://scholar.google.com/citations?hl=en&user=tmK5EPEAAAAJ">Jonathan May</a>, <a href = "https://jessethomason.com/">Jesse Thomason</a></p>
-                <p><em>EMNLP</em>, 2025 (Findings)</p>
-                <p><a href="https://arxiv.org/abs/2508.18297">Preprint</a> / <a href="https://github.com/DhananjayAshok/VLM_Grounding">Code</a></p>
-                <p>Tested VLMs' ability to recall factual knowledge about entities (CIFAR classes, Food101 classes, and Geo-Landmarks) to test the vision-language alignment in them.</p>
+            <div class="publication reveal" data-tags="Multimodal LLMs, Computer Vision, Highlight">
+                <!-- Optional: Add image here -->
+                <div class="publication-image">
+                    <img src="imgs/vlms_recall_paper.png" alt="VLMs Recall Factual Associations From Visual References">
+                </div>
+               
+                <div class="publication-content">
+                    <h3>Can VLMs Recall Factual Associations From Visual References?</h3>
+                    <p><a href = "https://dhananjayashok.github.io/">Dhananjay Ashok</a>, <strong>Ashutosh Chaubey</strong>, <a href = "https://hironaarai.com/">Hirona Arai</a>, <a href = "https://scholar.google.com/citations?hl=en&user=tmK5EPEAAAAJ">Jonathan May</a>, <a href = "https://jessethomason.com/">Jesse Thomason</a></p>
+                    <div class="publication-venue">
+                        <div class="publication-venue-info"><em><a href="https://2025.emnlp.org/" target="_blank">EMNLP</a></em>, 2025 (Findings)</div>
+                        <div class="publication-venue-links">
+                            <a href="https://aclanthology.org/2025.findings-emnlp.850/">Paper</a> / <a href="https://github.com/DhananjayAshok/VLM_Grounding">Code</a>
+                        </div>
+                    </div>
+                    <div class="publication-tags">
+                        <span class="publication-tag tag-multimodal-llms">Multimodal LLMs</span>
+                        <span class="publication-tag tag-cv">Computer Vision</span>
+                    </div>
+                </div>
             </div>
-            <div class="publication">
-                <h3>DiTaiListener: Controllable High Fidelity Listener Video Generation with Diffusion</h3>
-                <p><a href = "https://cv.maxi.su/">Maksim Siniukov</a>*, <a href="https://boese0601.github.io/">Di Chang</a>*, <a href="https://scholar.google.com/citations?hl=en&user=HuuQRj4AAAAJ">Minh Tran</a>, <a href="https://www.linkedin.com/in/hongkun-kevin-gong-7296a8262/">Hongkun Gong</a>, <strong>Ashutosh Chaubey</strong>, <a href="https://www.ihp-lab.org/">Mohammad Soleymani</a></p>
-                <p><em>ICCV</em>, 2025</p>
-                <p><a href="https://arxiv.org/abs/2504.04010">Preprint</a> / <a href="https://cv.maxi.su/DiTaiListener/">Project Page</a></p>
-                <p>Proposed a diffusion transformer (DiT) with causal multimodal attention to generate listener behaviors from audio-visual signals in speaker videos.</p>
-            </div>
-
-            <div class="publication">
-                <h3>ContextIQ: A Multimodal Expert-Based Video Retrieval System for Contextual Advertising</h3>
-                <p><strong>Ashutosh Chaubey</strong>, <a href="https://www.linkedin.com/in/anoubhav/">Anoubhav Agarwaal</a>, <a href="https://www.linkedin.com/in/sartaki-sinha-roy-2aa3a514b/">Sartaki Sinha Roy</a>, <a href="https://www.linkedin.com/in/aagrawal52/">Aayush Agrawal</a>, <a href="https://www.linkedin.com/in/susmitaghose/">Susmita Ghose</a></p>
-                <p><em>WACV</em>, 2025</p>
-                <p><a href="https://openaccess.thecvf.com/content/WACV2025/html/Chaubey_ContextIQ_A_Multimodal_Expert-Based_Video_Retrieval_System_for_Contextual_Advertising_WACV_2025_paper.html">Paper</a> / <a href="https://drive.google.com/file/d/1nzWWVVECsd1NaueNDsJt3X869eyLUD5d/view?usp=sharing">Poster</a> / <a href="misc_data/contextiq.bib">Cite</a> </p>
-                <p>Proposed ContextIQ, a novel framework for video retrieval for contextual advertising using a mixture of multimodal experts.</p>
-            </div>
-
-            <div class="publication">
-                <h3>Meta-Learning Framework for End-to-End Imposter Identification in Unseen Speaker Recognition</h3>
-                <p><strong>Ashutosh Chaubey</strong>, <a href="https://www.linkedin.com/in/sparsh-sinha-2b824018b/">Sparsh Sinha</a>, <a href="https://www.linkedin.com/in/susmitaghose/">Susmita Ghose</a></p>
-                <p><em>IEEE ASRU</em>, 2023</p>
-                <p><a href="https://arxiv.org/abs/2306.00952">Paper</a> / <a href="https://docs.google.com/presentation/d/1lPLo7s77JfLhfwStNgWdgqkLG1zfg-o7tJxaAFMQsiQ/edit">Poster</a> / <a href="misc_data/idn.bib">Cite</a></p>
-                <p>Proposed two novel approaches for imposter identification in unseen speaker recognition, including speaker-specific thresholding and a meta-learning approach.</p>
-            </div>
-
-            <div class="publication">
-                <h3>Improved Relation Networks for End-to-End Speaker Verification and Identification</h3>
-                <p><strong>Ashutosh Chaubey</strong>, <a href="https://www.linkedin.com/in/sparsh-sinha-2b824018b/">Sparsh Sinha</a>, <a href="https://www.linkedin.com/in/susmitaghose/">Susmita Ghose</a></p>
-                <p><em>Interspeech</em>, 2022</p>
-                <p><a href="https://arxiv.org/abs/2203.17218">Paper</a> / <a href="https://drive.google.com/file/d/11N1cBs3BGLuu3g9AFZxnu0eeCJWzVr3B/view?usp=sharing">Poster</a> / <a href="misc_data/relnet.bib">Cite</a></p>
-                <p>Enhanced speaker recognition using relation networks inspired by computer vision, with global supervision and faster training.</p>
-            </div>
-
-            <div class="publication">
-                <h3>OPAD: An Optimized Policy-based Active Learning Framework for Document Content Analysis</h3>
-                <p><a href="https://scholar.google.com/citations?user=Dluf41wAAAAJ&hl=en">Sumit Shekhar</a>, <a href="https://bhanu77prakash.github.io/">Bhanu Prakash Reddy Guda</a>, <strong>Ashutosh Chaubey</strong>, <a href="https://www.linkedin.com/in/ishan-jindal-9624b5149/?originalSubdomain=in">Ishan Jindal</a>, <a href="https://www.linkedin.com/in/avneetjain/?trk=public_profile_browsemap&originalSubdomain=in">Avneet Jain</a></p>
-                <p><em>CVPR Workshops</em>, 2022</p>
-                <p><a href="https://arxiv.org/abs/2110.02069">Paper</a> / <a href="https://patentimages.storage.googleapis.com/db/0d/3b/94433a1eacbccc/US20220253630A1.pdf">Patent</a> / <a href="misc_data/opad.bib">Cite</a></p>
-                <p>A reinforcement policy-based active learning approach for document content labeling tasks such as object detection and named entity recognition.</p>
+            <div class="publication reveal" data-tags="Multimodal LLMs, Computer Vision, Audio, Video Generation">
+                <!-- Optional: Add image here -->
+                <div class="publication-image">
+                    <img src="imgs/ditail_listener_logo.png" alt="DiTaiListener: Controllable High Fidelity Listener Video Generation with Diffusion">
+                </div>
+                
+                <div class="publication-content">
+                    <h3>DiTaiListener: Controllable High Fidelity Listener Video Generation with Diffusion</h3>
+                    <p><a href = "https://cv.maxi.su/">Maksim Siniukov</a>*, <a href="https://boese0601.github.io/">Di Chang</a>*, <a href="https://scholar.google.com/citations?hl=en&user=HuuQRj4AAAAJ">Minh Tran</a>, <a href="https://www.linkedin.com/in/hongkun-kevin-gong-7296a8262/">Hongkun Gong</a>, <strong>Ashutosh Chaubey</strong>, <a href="https://www.ihp-lab.org/">Mohammad Soleymani</a></p>
+                    <div class="publication-venue">
+                        <div class="publication-venue-info"><em><a href="https://iccv.thecvf.com/" target="_blank">ICCV</a></em>, 2025</div>
+                        <div class="publication-venue-links">
+                            <a href="https://openaccess.thecvf.com/content/ICCV2025/html/Siniukov_DiTaiListener_Controllable_High_Fidelity_Listener_Video_Generation_with_Diffusion_ICCV_2025_paper.html">Paper</a> / <a href="https://cv.maxi.su/DiTaiListener/">Project Page</a>
+                        </div>
+                    </div>
+                    <div class="publication-tags">
+                        <span class="publication-tag tag-multimodal-llms">Multimodal LLMs</span>
+                        <span class="publication-tag tag-cv">Computer Vision</span>
+                        <span class="publication-tag tag-audio">Audio</span>
+                        <span class="publication-tag tag-video">Video Generation</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="publication">
-                <h3>Universal Adversarial Perturbations: A Survey</h3>
-                <p><strong>Ashutosh Chaubey*</strong>, <a href="https://www.linkedin.com/in/nikhilagrawal2000/?originalSubdomain=in">Nikhil Agrawal*</a>, <a href="https://www.linkedin.com/in/kavya-barnwal-0ba720178/?originalSubdomain=in">Kavya Barnwal</a>, <a href="https://kkguliani.netlify.app/">Keerat K. Guliani</a>, <a href="https://www.linkedin.com/in/pramodmehtajgth/?originalSubdomain=in">Pramod Mehta</a></p>
-                <p><em>Survey paper</em>, arXiv 2020</p>
-                <p><a href="https://arxiv.org/abs/2005.08087">Paper</a> / <a href="misc_data/uap.bib">Cite</a></p>
-                <p>A comprehensive survey on universal adversarial perturbations, covering both attacks and defenses.</p>
+            <div class="publication reveal" data-tags="Multimodal LLMs, Computer Vision, Highlight">
+                <!-- Optional: Add image here -->
+                <div class="publication-image">
+                    <img src="imgs/contextiq_image.png" alt="ContextIQ: A Multimodal Expert-Based Video Retrieval System for Contextual Advertising">
+                </div>
+                
+                <div class="publication-content">
+                    <h3>ContextIQ: A Multimodal Expert-Based Video Retrieval System for Contextual Advertising</h3>
+                    <p><strong>Ashutosh Chaubey</strong>, <a href="https://www.linkedin.com/in/anoubhav/">Anoubhav Agarwaal</a>, <a href="https://www.linkedin.com/in/sartaki-sinha-roy-2aa3a514b/">Sartaki Sinha Roy</a>, <a href="https://www.linkedin.com/in/aagrawal52/">Aayush Agrawal</a>, <a href="https://www.linkedin.com/in/susmitaghose/">Susmita Ghose</a></p>
+                    <div class="publication-venue">
+                        <div class="publication-venue-info"><em><a href="https://wacv2025.thecvf.com/" target="_blank">WACV</a></em>, 2025</div>
+                        <div class="publication-venue-links">
+                            <a href="https://openaccess.thecvf.com/content/WACV2025/html/Chaubey_ContextIQ_A_Multimodal_Expert-Based_Video_Retrieval_System_for_Contextual_Advertising_WACV_2025_paper.html">Paper</a> / <a href="https://drive.google.com/file/d/1nzWWVVECsd1NaueNDsJt3X869eyLUD5d/view?usp=sharing">Poster</a>
+                        </div>
+                    </div>
+                    <div class="publication-tags">
+                        <span class="publication-tag tag-multimodal-llms">Multimodal LLMs</span>
+                        <span class="publication-tag tag-cv">Computer Vision</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="publication">
-                <h3>A Generative Adversarial Network Based Ensemble Technique for Automatic Evaluation of Machine Synthesized Speech</h3>
-                <p><strong>Ashutosh Chaubey*</strong>, <a href="https://www.linkedin.com/in/jaynil-jaiswal/?originalSubdomain=in">Jaynil Jaiswal*</a>, <a href="https://www.linkedin.com/in/sasikiranreddy/?originalSubdomain=in">Sasi Kiran Reddy Bhimvarapu</a>, <a href="https://www.linkedin.com/in/shashkashyap/?originalSubdomain=in">Shashank Kashyap</a>, <a href="https://scholar.google.co.in/citations?user=8ieLBZ8AAAAJ&hl=en">Puneet Kumar</a>, <a href="https://scholar.google.co.in/citations?user=QU2O6JMAAAAJ&hl=en">Balasubramanian Raman</a>, <a href="https://scholar.google.co.in/citations?user=moDpyKkAAAAJ&hl=en">Partha Pratim Roy</a></p>
-                <p><em>ACPR</em>, 2019</p>
-                <p><a href="https://dl.acm.org/doi/abs/10.1007/978-3-030-41299-9_45">Paper</a> / <a href="misc_data/evalgan.bib">Cite</a></p>
-                <p>Proposed a technique leveraging the discriminator from a GAN-based TTS model for automatic evaluation of machine synthesized speech.</p>
+            <div class="publication reveal" data-tags="Audio">
+                <!-- Optional: Add image here -->
+                <div class="publication-image">
+                    <img src="imgs/idn_2.png" alt="Meta-Learning Framework for End-to-End Imposter Identification in Unseen Speaker Recognition">
+                </div>
+               
+                <div class="publication-content">
+                    <h3>Meta-Learning Framework for End-to-End Imposter Identification in Unseen Speaker Recognition</h3>
+                    <p><strong>Ashutosh Chaubey</strong>, <a href="https://www.linkedin.com/in/sparsh-sinha-2b824018b/">Sparsh Sinha</a>, <a href="https://www.linkedin.com/in/susmitaghose/">Susmita Ghose</a></p>
+                    <div class="publication-venue">
+                        <div class="publication-venue-info"><em><a href="http://www.asru2023.org/" target="_blank">IEEE ASRU</a></em>, 2023</div>
+                        <div class="publication-venue-links">
+                            <a href="https://arxiv.org/abs/2306.00952">Paper</a> / <a href="https://docs.google.com/presentation/d/1lPLo7s77JfLhfwStNgWdgqkLG1zfg-o7tJxaAFMQsiQ/edit">Poster</a>
+                        </div>
+                    </div>
+                    <div class="publication-tags">
+                        <span class="publication-tag tag-audio">Audio</span>
+                    </div>
+                </div>
             </div>
+
+            <div class="publication reveal" data-tags="Audio">
+                <!-- Optional: Add image here -->
+                <div class="publication-image">
+                    <img src="imgs/relnet_1.jpg" alt="Improved Relation Networks for End-to-End Speaker Verification and Identification">
+                </div>
+               
+                <div class="publication-content">
+                    <h3>Improved Relation Networks for End-to-End Speaker Verification and Identification</h3>
+                    <p><strong>Ashutosh Chaubey</strong>, <a href="https://www.linkedin.com/in/sparsh-sinha-2b824018b/">Sparsh Sinha</a>, <a href="https://www.linkedin.com/in/susmitaghose/">Susmita Ghose</a></p>
+                    <div class="publication-venue">
+                        <div class="publication-venue-info"><em><a href="https://www.interspeech2022.org/" target="_blank">Interspeech</a></em>, 2022</div>
+                        <div class="publication-venue-links">
+                            <a href="https://arxiv.org/abs/2203.17218">Paper</a> / <a href="https://drive.google.com/file/d/11N1cBs3BGLuu3g9AFZxnu0eeCJWzVr3B/view?usp=sharing">Poster</a>
+                        </div>
+                    </div>
+                    <div class="publication-tags">
+                        <span class="publication-tag tag-audio">Audio</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="publication reveal" data-tags="Reinforcement Learning, Computer Vision">
+                <!-- Optional: Add image here -->
+                <div class="publication-image">
+                    <img src="imgs/opad_1.png" alt="OPAD: An Optimized Policy-based Active Learning Framework for Document Content Analysis">
+                </div>
+               
+                <div class="publication-content">
+                    <h3>OPAD: An Optimized Policy-based Active Learning Framework for Document Content Analysis</h3>
+                    <p><a href="https://scholar.google.com/citations?user=Dluf41wAAAAJ&hl=en">Sumit Shekhar</a>, <a href="https://bhanu77prakash.github.io/">Bhanu Prakash Reddy Guda</a>, <strong>Ashutosh Chaubey</strong>, <a href="https://www.linkedin.com/in/ishan-jindal-9624b5149/?originalSubdomain=in">Ishan Jindal</a>, <a href="https://www.linkedin.com/in/avneetjain/?trk=public_profile_browsemap&originalSubdomain=in">Avneet Jain</a></p>
+                    <div class="publication-venue">
+                        <div class="publication-venue-info"><em><a href="https://cvpr2022.thecvf.com/" target="_blank">CVPR Workshops</a></em>, 2022</div>
+                        <div class="publication-venue-links">
+                            <a href="https://arxiv.org/abs/2110.02069">Paper</a> / <a href="https://patentimages.storage.googleapis.com/db/0d/3b/94433a1eacbccc/US20220253630A1.pdf">Patent</a>
+                        </div>
+                    </div>
+                    <div class="publication-tags">
+                        <span class="publication-tag tag-rl">Reinforcement Learning</span>
+                        <span class="publication-tag tag-cv">Computer Vision</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="publication reveal" data-tags="Computer Vision">
+                <!-- Optional: Add image here -->
+                <div class="publication-image">
+                    <img src="imgs/uap_1.jpg" alt="Universal Adversarial Perturbations: A Survey">
+                </div>
+               
+                <div class="publication-content">
+                    <h3>Universal Adversarial Perturbations: A Survey</h3>
+                    <p><strong>Ashutosh Chaubey*</strong>, <a href="https://www.linkedin.com/in/nikhilagrawal2000/?originalSubdomain=in">Nikhil Agrawal*</a>, <a href="https://www.linkedin.com/in/kavya-barnwal-0ba720178/?originalSubdomain=in">Kavya Barnwal</a>, <a href="https://kkguliani.netlify.app/">Keerat K. Guliani</a>, <a href="https://www.linkedin.com/in/pramodmehtajgth/?originalSubdomain=in">Pramod Mehta</a></p>
+                    <div class="publication-venue">
+                        <div class="publication-venue-info"><em>Survey paper</em>, <a href="https://arxiv.org/" target="_blank">arXiv</a> 2020</div>
+                        <div class="publication-venue-links">
+                            <a href="https://arxiv.org/abs/2005.08087">Paper</a>
+                        </div>
+                    </div>
+                    <div class="publication-tags">
+                        <span class="publication-tag tag-cv">Computer Vision</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="publication reveal" data-tags="Audio">
+                <div class="publication-image">
+                    <img src="imgs/evalgan_1.png" alt="A Generative Adversarial Network Based Ensemble Technique for Automatic Evaluation of Machine Synthesized Speech">
+                </div>
+               
+                <div class="publication-content">
+                    <h3>A Generative Adversarial Network Based Ensemble Technique for Automatic Evaluation of Machine Synthesized Speech</h3>
+                    <p><strong>Ashutosh Chaubey*</strong>, <a href="https://www.linkedin.com/in/jaynil-jaiswal/?originalSubdomain=in">Jaynil Jaiswal*</a>, <a href="https://www.linkedin.com/in/sasikiranreddy/?originalSubdomain=in">Sasi Kiran Reddy Bhimvarapu</a>, <a href="https://www.linkedin.com/in/shashkashyap/?originalSubdomain=in">Shashank Kashyap</a>, <a href="https://scholar.google.co.in/citations?user=8ieLBZ8AAAAJ&hl=en">Puneet Kumar</a>, <a href="https://scholar.google.co.in/citations?user=QU2O6JMAAAAJ&hl=en">Balasubramanian Raman</a>, <a href="https://scholar.google.co.in/citations?user=moDpyKkAAAAJ&hl=en">Partha Pratim Roy</a></p>
+                    <p><em>ACPR</em>, 2019</p>
+                    <p><a href="https://dl.acm.org/doi/abs/10.1007/978-3-030-41299-9_45">Paper</a> / <a href="misc_data/evalgan.bib">Cite</a></p>
+                    <div class="publication-tags">
+                        <span class="publication-tag">Audio</span>
+                    </div>
+                </div>
+            </div> -->
         </section>
 
-        <section class="section">
+        <section class="section reveal">
             <h2>Education</h2>
-            <p><strong>University of Southern California</strong> – PhD, Computer Science (2024 - Present), GPA: 4.0/4.0</p>
-            <p>Graduate Researcher – <a href="https://www.ihp-lab.org/">Intelligent Human Perception Lab</a>, <a href="https://ict.usc.edu/">Institute for Creative Technologies</a></p>
-            <br>
-            <p><strong>Indian Institute of Technology Roorkee</strong> – BS, Computer Science (2017 - 2021), GPA: 9.718/10</p>
-            <p>Chair - <a href="http://iitr.acm.org/#/">ACM IIT Roorke Chapter</a> | Co-President - <a href="https://vlgiitr.github.io/">Vision and Language Group</a></p>
+            <div class="education-item">
+                <div class="education-logo">
+                    <img src="imgs/usc_logo.png" alt="USC Logo">
+                </div>
+                <div class="education-content">
+                    <p><strong>University of Southern California</strong> – PhD, Computer Science (2024 - Present), GPA: 4.0/4.0</p>
+                    <p>Graduate Researcher – <a href="https://www.ihp-lab.org/">Intelligent Human Perception Lab</a>, <a href="https://ict.usc.edu/">Institute for Creative Technologies</a></p>
+                </div>
+            </div>
+            <div class="education-item">
+                <div class="education-logo">
+                    <img src="imgs/iitr_logo.png" alt="IIT Roorkee Logo">
+                </div>
+                <div class="education-content">
+                    <p><strong>Indian Institute of Technology Roorkee</strong> – BS, Computer Science (2017 - 2021), GPA: 9.718/10</p>
+                    <p>Chair - <a href="http://iitr.acm.org/#/">ACM IIT Roorke Chapter</a> | Co-President - <a href="https://vlgiitr.github.io/">Vision and Language Group</a></p>
+                </div>
+            </div>
         </section>
 
         <!-- <section class="section">
@@ -488,9 +1198,142 @@
             <p>My hobbies include cooking and playing guitar. I am obsessed with the songs of <a href="https://open.spotify.com/artist/0tC995Rfn9k2l7nqgCZsV7">Prateek Kuhad</a> and <a href="https://open.spotify.com/artist/4gdMJYnopf2nEUcanAwstx">Anuv Jain</a>.</p>
         </section> -->
 
-        <footer>
+        <footer class="reveal">
             <p>Feel free to use this template from my <a href="https://github.com/ac-alpha/ac-alpha.github.io">GitHub</a>.</p>
         </footer>
+
+        <script>
+            // Scroll reveal animation
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all elements with reveal class
+            document.querySelectorAll('.reveal').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Trigger initial animation for header
+            window.addEventListener('load', () => {
+                document.querySelector('header h1').style.animationPlayState = 'running';
+            });
+
+            // Tag Filtering System
+            (function() {
+                const publications = document.querySelectorAll('.publication[data-tags]');
+                const tagFiltersContainer = document.getElementById('tagFilters');
+                const selectedTags = new Set();
+                
+                // Allowed tags only
+                const allowedTags = [
+                    'Computer Vision',
+                    'Multimodal LLMs',
+                    'Reinforcement Learning',
+                    'Audio',
+                    'Face Analysis',
+                    'Video Generation',
+                    'Highlight'
+                ];
+                
+                // Create filter buttons for each allowed tag (sorted alphabetically)
+                allowedTags.sort().forEach(tag => {
+                    const btn = document.createElement('button');
+                    btn.className = 'tag-filter-btn'; // Not active by default
+                    btn.textContent = tag;
+                    btn.setAttribute('data-tag', tag);
+                    btn.addEventListener('click', () => toggleTag(tag, btn));
+                    tagFiltersContainer.appendChild(btn);
+                });
+                
+                // Toggle tag filter
+                function toggleTag(tag, btn) {
+                    if (selectedTags.has(tag)) {
+                        selectedTags.delete(tag);
+                        btn.classList.remove('active');
+                    } else {
+                        selectedTags.add(tag);
+                        btn.classList.add('active');
+                    }
+                    filterPublications();
+                }
+                
+                // Filter publications based on selected tags
+                function filterPublications() {
+                    // If no tags selected, show all publications
+                    if (selectedTags.size === 0) {
+                        publications.forEach(pub => {
+                            pub.classList.remove('hidden');
+                        });
+                        return;
+                    }
+                    
+                    // If tags are selected, show only publications with at least one selected tag
+                    publications.forEach(pub => {
+                        const pubTags = pub.getAttribute('data-tags').split(',').map(t => t.trim());
+                        const hasSelectedTag = pubTags.some(tag => selectedTags.has(tag));
+                        
+                        if (hasSelectedTag) {
+                            pub.classList.remove('hidden');
+                        } else {
+                            pub.classList.add('hidden');
+                        }
+                    });
+                }
+                
+                // Initial filter (show all - no tags selected)
+                filterPublications();
+            })();
+
+            // Auto-assign tag color classes based on text content
+            (function() {
+                const tagClassMap = {
+                    'Computer Vision': 'tag-cv',
+                    'Multimodal LLMs': 'tag-multimodal-llms',
+                    'Reinforcement Learning': 'tag-rl',
+                    'Audio': 'tag-audio',
+                    'Face Analysis': 'tag-face',
+                    'Video Generation': 'tag-video',
+                    'Highlight': 'tag-highlight'
+                };
+
+                document.querySelectorAll('.publication-tag').forEach(tag => {
+                    const tagText = tag.textContent.trim();
+                    if (tagClassMap[tagText] && !tag.classList.contains(tagClassMap[tagText])) {
+                        tag.classList.add(tagClassMap[tagText]);
+                    }
+                });
+            })();
+
+            // Add highlight styling and badge to publications with Highlight tag
+            (function() {
+                document.querySelectorAll('.publication[data-tags]').forEach(pub => {
+                    const pubTags = pub.getAttribute('data-tags').split(',').map(t => t.trim());
+                    if (pubTags.includes('Highlight')) {
+                        pub.classList.add('highlighted');
+                        
+                        // Add highlight badge (star icon) if it doesn't exist
+                        if (!pub.querySelector('.publication-highlight-badge')) {
+                            const badge = document.createElement('span');
+                            badge.className = 'publication-highlight-badge';
+                            badge.setAttribute('aria-label', 'Featured publication');
+                            const starIcon = document.createElement('i');
+                            starIcon.className = 'fa-solid fa-star';
+                            badge.appendChild(starIcon);
+                            pub.appendChild(badge);
+                        }
+                    }
+                });
+            })();
+        </script>
 
         <!-- <script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=lFqDk8RzzqBEM1YJcP38LyHOz3JOjUESG7EdZEJEpqs"></script> -->
 
