@@ -29,6 +29,54 @@
             padding: 0;
             font-size: 16px;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Scroll progress indicator */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, #2563eb, #3b82f6, #8b5cf6);
+            z-index: 9999;
+            transition: width 0.1s ease;
+            box-shadow: 0 2px 10px rgba(37, 99, 235, 0.3);
+        }
+
+
+        /* Fun hover effects */
+        .publication-image img {
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+
+        .publication-tag:hover {
+            transform: translateY(-2px) scale(1.05);
+        }
+
+
+
+        /* Elegant link hover - no underlines for profile links */
+        a:not(.tag-filter-btn):not(.publication-tag):not(.links a) {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        a:not(.tag-filter-btn):not(.publication-tag):not(.links a)::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #2563eb, #8b5cf6);
+            transition: width 0.3s ease;
+        }
+
+        a:not(.tag-filter-btn):not(.publication-tag):not(.links a):hover::after {
+            width: 100%;
         }
 
         .container {
@@ -69,6 +117,74 @@
             margin-bottom: 10px;
             opacity: 0;
             animation: fadeInDown 0.8s ease-out 0.2s forwards;
+            position: relative;
+            display: inline-block;
+            cursor: default;
+            transition: transform 0.3s ease;
+        }
+
+        header h1:hover {
+            transform: scale(1.05);
+        }
+
+        /* header h1::after {
+            content: '✨';
+            position: absolute;
+            right: -35px;
+            top: 0;
+            font-size: 0.5em;
+            animation: sparkleRotate 2s ease-in-out infinite;
+            opacity: 0.8;
+        } */
+
+        @keyframes sparkleRotate {
+            0%, 100% {
+                transform: rotate(0deg) scale(1);
+            }
+            50% {
+                transform: rotate(180deg) scale(1.3);
+            }
+        }
+
+        @keyframes rainbow {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        @keyframes rainbowShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        /* Elegant fade-in animation for sections */
+        @keyframes elegantFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Smooth scale animation */
+        @keyframes gentleScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Elegant hover lift effect */
+        .publication,
+        .news-container,
+        .accordion {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         @keyframes fadeInDown {
@@ -168,8 +284,8 @@
         }
 
         .about-image img:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
         }
 
         .links {
@@ -187,6 +303,8 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
             width: 44px;
             height: 44px;
             border-radius: 50%;
@@ -199,8 +317,8 @@
         .links a:hover {
             color: #ffffff;
             background: linear-gradient(135deg, #2563eb, #3b82f6);
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+            transform: translateY(-4px) scale(1.08);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
             border-color: transparent;
         }
 
@@ -390,17 +508,38 @@
             border: 2px solid #f59e0b;
             background: linear-gradient(135deg, #fffbeb 0%, #ffffff 100%);
             box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
+            animation: highlightPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes highlightPulse {
+            0%, 100% {
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
+            }
+            50% {
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.25);
+            }
         }
 
         .publication.highlighted::before {
             opacity: 1;
             background: linear-gradient(180deg, #f59e0b, #f97316);
             width: 5px;
+            animation: shimmer 2s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% {
+            opacity: 1;
+            }
+            50% {
+            opacity: 0.7;
+            }
         }
 
         .publication.highlighted:hover {
-            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.25);
+            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.35);
             border-color: #f97316;
+            transform: translateX(5px) translateY(-3px) scale(1.01);
         }
 
         .publication::before {
@@ -416,9 +555,10 @@
         }
 
         .publication:hover {
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-            transform: translateX(5px);
-            border-color: #cbd5e1;
+            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.15);
+            transform: translateX(6px) translateY(-3px);
+            border-color: #94a3b8;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
         }
 
         .publication:hover::before {
@@ -440,8 +580,8 @@
         }
 
         .publication:hover .publication-image img {
-            transform: scale(1.02);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.2);
         }
 
         .publication-content {
@@ -540,15 +680,36 @@
             font-size: 0.9em;
             color: #555;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             font-weight: 500;
             user-select: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tag-filter-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(37, 99, 235, 0.1);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .tag-filter-btn:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .tag-filter-btn:hover {
             background: #f1f5f9;
             border-color: #94a3b8;
-            transform: translateY(-1px);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .tag-filter-btn.active {
@@ -560,7 +721,13 @@
 
         .tag-filter-btn.active:hover {
             background: linear-gradient(135deg, #1e40af, #2563eb);
-            transform: translateY(-1px);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+        }
+
+        .tag-filter-btn span {
+            position: relative;
+            z-index: 1;
         }
 
         /* Publication Tags */
@@ -579,6 +746,13 @@
             font-size: 0.85em;
             font-weight: 500;
             border: 1px solid;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: default;
+        }
+
+        .publication-tag:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
         }
 
         /* Different colors for different tags */
@@ -701,8 +875,17 @@
             text-decoration: none;
             border-bottom: 1px solid rgba(37, 99, 235, 0.3);
             transition: all 0.3s ease;
-            font-weight: 500;
         }
+
+        footer a:hover {
+            color: #1e40af;
+            border-bottom-color: #1e40af;
+            transform: translateY(-1px);
+        }
+
+        /* Enhanced link hover effects */
+
+        /* Celebration effect for highlighted publications */
 
         footer a:hover {
             color: #1e40af;
@@ -857,6 +1040,9 @@
 </head>
 
 <body>
+    <!-- Scroll progress indicator -->
+    <div class="scroll-progress"></div>
+    
     <header>
         <h1>Ashutosh Chaubey</h1>
     </header>
@@ -962,8 +1148,8 @@
                 </div>
                 <!-- -->
                 <div class="publication-content">
-                    <h3>LibreFace 2.0 : Leveraging Large-Scale Synthetic Data for Fair and Generalizable Facial Analysis</h3>
-                    <p><a href="https://www.linkedin.com/in/xulang-guan-3040a6268/">Xulang Guan*</a>, <strong>Ashutosh Chaubey*</strong>, <a href = "https://cv.maxi.su/">Maksim Siniukov</a>, Belle Hsieh, Zongjian Li, <a href="https://www.ihp-lab.org/">Mohammad Soleymani</a></p>
+                <h3>LibreFace 2.0 : Leveraging Large-Scale Synthetic Data for Fair and Generalizable Facial Analysis</h3>
+                <p><a href="https://www.linkedin.com/in/xulang-guan-3040a6268/">Xulang Guan*</a>, <strong>Ashutosh Chaubey*</strong>, <a href = "https://cv.maxi.su/">Maksim Siniukov</a>, Belle Hsieh, Zongjian Li, <a href="https://www.ihp-lab.org/">Mohammad Soleymani</a></p>
                     <div class="publication-venue">
                         <div class="publication-venue-info"><em><a href="https://fg2026.ieee-biometric.org/" target="_blank">FG</a></em>, 2026 (Round 1 early)</div>
                         <div class="publication-venue-links">
@@ -984,8 +1170,8 @@
                 </div>
                
                 <div class="publication-content">
-                    <h3>Face-LLaVA: Facial Expression and Attribute Understanding through Instruction Tuning</h3>
-                    <p><strong>Ashutosh Chaubey</strong>, <a href="https://www.linkedin.com/in/xulang-guan-3040a6268/">Xulang Guan</a>, <a href="https://www.ihp-lab.org/">Mohammad Soleymani</a></p>
+                <h3>Face-LLaVA: Facial Expression and Attribute Understanding through Instruction Tuning</h3>
+                <p><strong>Ashutosh Chaubey</strong>, <a href="https://www.linkedin.com/in/xulang-guan-3040a6268/">Xulang Guan</a>, <a href="https://www.ihp-lab.org/">Mohammad Soleymani</a></p>
                     <div class="publication-venue">
                         <div class="publication-venue-info"><em><a href="https://wacv.thecvf.com/" target="_blank">WACV</a></em>, 2026 (Round 1 - 6.4% accept.)</div>
                         <div class="publication-venue-links">
@@ -1008,13 +1194,13 @@
                 </div>
                
                 <div class="publication-content">
-                    <h3>Can VLMs Recall Factual Associations From Visual References?</h3>
-                    <p><a href = "https://dhananjayashok.github.io/">Dhananjay Ashok</a>, <strong>Ashutosh Chaubey</strong>, <a href = "https://hironaarai.com/">Hirona Arai</a>, <a href = "https://scholar.google.com/citations?hl=en&user=tmK5EPEAAAAJ">Jonathan May</a>, <a href = "https://jessethomason.com/">Jesse Thomason</a></p>
+                <h3>Can VLMs Recall Factual Associations From Visual References?</h3>
+                <p><a href = "https://dhananjayashok.github.io/">Dhananjay Ashok</a>, <strong>Ashutosh Chaubey</strong>, <a href = "https://hironaarai.com/">Hirona Arai</a>, <a href = "https://scholar.google.com/citations?hl=en&user=tmK5EPEAAAAJ">Jonathan May</a>, <a href = "https://jessethomason.com/">Jesse Thomason</a></p>
                     <div class="publication-venue">
                         <div class="publication-venue-info"><em><a href="https://2025.emnlp.org/" target="_blank">EMNLP</a></em>, 2025 (Findings)</div>
                         <div class="publication-venue-links">
                             <a href="https://aclanthology.org/2025.findings-emnlp.850/">Paper</a> / <a href="https://github.com/DhananjayAshok/VLM_Grounding">Code</a>
-                        </div>
+            </div>
                     </div>
                     <div class="publication-tags">
                         <span class="publication-tag tag-multimodal-llms">Multimodal LLMs</span>
@@ -1029,8 +1215,8 @@
                 </div>
                 
                 <div class="publication-content">
-                    <h3>DiTaiListener: Controllable High Fidelity Listener Video Generation with Diffusion</h3>
-                    <p><a href = "https://cv.maxi.su/">Maksim Siniukov</a>*, <a href="https://boese0601.github.io/">Di Chang</a>*, <a href="https://scholar.google.com/citations?hl=en&user=HuuQRj4AAAAJ">Minh Tran</a>, <a href="https://www.linkedin.com/in/hongkun-kevin-gong-7296a8262/">Hongkun Gong</a>, <strong>Ashutosh Chaubey</strong>, <a href="https://www.ihp-lab.org/">Mohammad Soleymani</a></p>
+                <h3>DiTaiListener: Controllable High Fidelity Listener Video Generation with Diffusion</h3>
+                <p><a href = "https://cv.maxi.su/">Maksim Siniukov</a>*, <a href="https://boese0601.github.io/">Di Chang</a>*, <a href="https://scholar.google.com/citations?hl=en&user=HuuQRj4AAAAJ">Minh Tran</a>, <a href="https://www.linkedin.com/in/hongkun-kevin-gong-7296a8262/">Hongkun Gong</a>, <strong>Ashutosh Chaubey</strong>, <a href="https://www.ihp-lab.org/">Mohammad Soleymani</a></p>
                     <div class="publication-venue">
                         <div class="publication-venue-info"><em><a href="https://iccv.thecvf.com/" target="_blank">ICCV</a></em>, 2025</div>
                         <div class="publication-venue-links">
@@ -1053,8 +1239,8 @@
                 </div>
                 
                 <div class="publication-content">
-                    <h3>ContextIQ: A Multimodal Expert-Based Video Retrieval System for Contextual Advertising</h3>
-                    <p><strong>Ashutosh Chaubey</strong>, <a href="https://www.linkedin.com/in/anoubhav/">Anoubhav Agarwaal</a>, <a href="https://www.linkedin.com/in/sartaki-sinha-roy-2aa3a514b/">Sartaki Sinha Roy</a>, <a href="https://www.linkedin.com/in/aagrawal52/">Aayush Agrawal</a>, <a href="https://www.linkedin.com/in/susmitaghose/">Susmita Ghose</a></p>
+                <h3>ContextIQ: A Multimodal Expert-Based Video Retrieval System for Contextual Advertising</h3>
+                <p><strong>Ashutosh Chaubey</strong>, <a href="https://www.linkedin.com/in/anoubhav/">Anoubhav Agarwaal</a>, <a href="https://www.linkedin.com/in/sartaki-sinha-roy-2aa3a514b/">Sartaki Sinha Roy</a>, <a href="https://www.linkedin.com/in/aagrawal52/">Aayush Agrawal</a>, <a href="https://www.linkedin.com/in/susmitaghose/">Susmita Ghose</a></p>
                     <div class="publication-venue">
                         <div class="publication-venue-info"><em><a href="https://wacv2025.thecvf.com/" target="_blank">WACV</a></em>, 2025</div>
                         <div class="publication-venue-links">
@@ -1075,8 +1261,8 @@
                 </div>
                
                 <div class="publication-content">
-                    <h3>Meta-Learning Framework for End-to-End Imposter Identification in Unseen Speaker Recognition</h3>
-                    <p><strong>Ashutosh Chaubey</strong>, <a href="https://www.linkedin.com/in/sparsh-sinha-2b824018b/">Sparsh Sinha</a>, <a href="https://www.linkedin.com/in/susmitaghose/">Susmita Ghose</a></p>
+                <h3>Meta-Learning Framework for End-to-End Imposter Identification in Unseen Speaker Recognition</h3>
+                <p><strong>Ashutosh Chaubey</strong>, <a href="https://www.linkedin.com/in/sparsh-sinha-2b824018b/">Sparsh Sinha</a>, <a href="https://www.linkedin.com/in/susmitaghose/">Susmita Ghose</a></p>
                     <div class="publication-venue">
                         <div class="publication-venue-info"><em><a href="http://www.asru2023.org/" target="_blank">IEEE ASRU</a></em>, 2023</div>
                         <div class="publication-venue-links">
@@ -1096,8 +1282,8 @@
                 </div>
                
                 <div class="publication-content">
-                    <h3>Improved Relation Networks for End-to-End Speaker Verification and Identification</h3>
-                    <p><strong>Ashutosh Chaubey</strong>, <a href="https://www.linkedin.com/in/sparsh-sinha-2b824018b/">Sparsh Sinha</a>, <a href="https://www.linkedin.com/in/susmitaghose/">Susmita Ghose</a></p>
+                <h3>Improved Relation Networks for End-to-End Speaker Verification and Identification</h3>
+                <p><strong>Ashutosh Chaubey</strong>, <a href="https://www.linkedin.com/in/sparsh-sinha-2b824018b/">Sparsh Sinha</a>, <a href="https://www.linkedin.com/in/susmitaghose/">Susmita Ghose</a></p>
                     <div class="publication-venue">
                         <div class="publication-venue-info"><em><a href="https://www.interspeech2022.org/" target="_blank">Interspeech</a></em>, 2022</div>
                         <div class="publication-venue-links">
@@ -1117,8 +1303,8 @@
                 </div>
                
                 <div class="publication-content">
-                    <h3>OPAD: An Optimized Policy-based Active Learning Framework for Document Content Analysis</h3>
-                    <p><a href="https://scholar.google.com/citations?user=Dluf41wAAAAJ&hl=en">Sumit Shekhar</a>, <a href="https://bhanu77prakash.github.io/">Bhanu Prakash Reddy Guda</a>, <strong>Ashutosh Chaubey</strong>, <a href="https://www.linkedin.com/in/ishan-jindal-9624b5149/?originalSubdomain=in">Ishan Jindal</a>, <a href="https://www.linkedin.com/in/avneetjain/?trk=public_profile_browsemap&originalSubdomain=in">Avneet Jain</a></p>
+                <h3>OPAD: An Optimized Policy-based Active Learning Framework for Document Content Analysis</h3>
+                <p><a href="https://scholar.google.com/citations?user=Dluf41wAAAAJ&hl=en">Sumit Shekhar</a>, <a href="https://bhanu77prakash.github.io/">Bhanu Prakash Reddy Guda</a>, <strong>Ashutosh Chaubey</strong>, <a href="https://www.linkedin.com/in/ishan-jindal-9624b5149/?originalSubdomain=in">Ishan Jindal</a>, <a href="https://www.linkedin.com/in/avneetjain/?trk=public_profile_browsemap&originalSubdomain=in">Avneet Jain</a></p>
                     <div class="publication-venue">
                         <div class="publication-venue-info"><em><a href="https://cvpr2022.thecvf.com/" target="_blank">CVPR Workshops</a></em>, 2022</div>
                         <div class="publication-venue-links">
@@ -1139,8 +1325,8 @@
                 </div>
                
                 <div class="publication-content">
-                    <h3>Universal Adversarial Perturbations: A Survey</h3>
-                    <p><strong>Ashutosh Chaubey*</strong>, <a href="https://www.linkedin.com/in/nikhilagrawal2000/?originalSubdomain=in">Nikhil Agrawal*</a>, <a href="https://www.linkedin.com/in/kavya-barnwal-0ba720178/?originalSubdomain=in">Kavya Barnwal</a>, <a href="https://kkguliani.netlify.app/">Keerat K. Guliani</a>, <a href="https://www.linkedin.com/in/pramodmehtajgth/?originalSubdomain=in">Pramod Mehta</a></p>
+                <h3>Universal Adversarial Perturbations: A Survey</h3>
+                <p><strong>Ashutosh Chaubey*</strong>, <a href="https://www.linkedin.com/in/nikhilagrawal2000/?originalSubdomain=in">Nikhil Agrawal*</a>, <a href="https://www.linkedin.com/in/kavya-barnwal-0ba720178/?originalSubdomain=in">Kavya Barnwal</a>, <a href="https://kkguliani.netlify.app/">Keerat K. Guliani</a>, <a href="https://www.linkedin.com/in/pramodmehtajgth/?originalSubdomain=in">Pramod Mehta</a></p>
                     <div class="publication-venue">
                         <div class="publication-venue-info"><em>Survey paper</em>, <a href="https://arxiv.org/" target="_blank">arXiv</a> 2020</div>
                         <div class="publication-venue-links">
@@ -1159,13 +1345,13 @@
                 </div>
                
                 <div class="publication-content">
-                    <h3>A Generative Adversarial Network Based Ensemble Technique for Automatic Evaluation of Machine Synthesized Speech</h3>
-                    <p><strong>Ashutosh Chaubey*</strong>, <a href="https://www.linkedin.com/in/jaynil-jaiswal/?originalSubdomain=in">Jaynil Jaiswal*</a>, <a href="https://www.linkedin.com/in/sasikiranreddy/?originalSubdomain=in">Sasi Kiran Reddy Bhimvarapu</a>, <a href="https://www.linkedin.com/in/shashkashyap/?originalSubdomain=in">Shashank Kashyap</a>, <a href="https://scholar.google.co.in/citations?user=8ieLBZ8AAAAJ&hl=en">Puneet Kumar</a>, <a href="https://scholar.google.co.in/citations?user=QU2O6JMAAAAJ&hl=en">Balasubramanian Raman</a>, <a href="https://scholar.google.co.in/citations?user=moDpyKkAAAAJ&hl=en">Partha Pratim Roy</a></p>
-                    <p><em>ACPR</em>, 2019</p>
-                    <p><a href="https://dl.acm.org/doi/abs/10.1007/978-3-030-41299-9_45">Paper</a> / <a href="misc_data/evalgan.bib">Cite</a></p>
+                <h3>A Generative Adversarial Network Based Ensemble Technique for Automatic Evaluation of Machine Synthesized Speech</h3>
+                <p><strong>Ashutosh Chaubey*</strong>, <a href="https://www.linkedin.com/in/jaynil-jaiswal/?originalSubdomain=in">Jaynil Jaiswal*</a>, <a href="https://www.linkedin.com/in/sasikiranreddy/?originalSubdomain=in">Sasi Kiran Reddy Bhimvarapu</a>, <a href="https://www.linkedin.com/in/shashkashyap/?originalSubdomain=in">Shashank Kashyap</a>, <a href="https://scholar.google.co.in/citations?user=8ieLBZ8AAAAJ&hl=en">Puneet Kumar</a>, <a href="https://scholar.google.co.in/citations?user=QU2O6JMAAAAJ&hl=en">Balasubramanian Raman</a>, <a href="https://scholar.google.co.in/citations?user=moDpyKkAAAAJ&hl=en">Partha Pratim Roy</a></p>
+                <p><em>ACPR</em>, 2019</p>
+                <p><a href="https://dl.acm.org/doi/abs/10.1007/978-3-030-41299-9_45">Paper</a> / <a href="misc_data/evalgan.bib">Cite</a></p>
                     <div class="publication-tags">
                         <span class="publication-tag">Audio</span>
-                    </div>
+            </div>
                 </div>
             </div> -->
         </section>
@@ -1177,8 +1363,8 @@
                     <img src="imgs/usc_logo.png" alt="USC Logo">
                 </div>
                 <div class="education-content">
-                    <p><strong>University of Southern California</strong> – PhD, Computer Science (2024 - Present), GPA: 4.0/4.0</p>
-                    <p>Graduate Researcher – <a href="https://www.ihp-lab.org/">Intelligent Human Perception Lab</a>, <a href="https://ict.usc.edu/">Institute for Creative Technologies</a></p>
+            <p><strong>University of Southern California</strong> – PhD, Computer Science (2024 - Present), GPA: 4.0/4.0</p>
+            <p>Graduate Researcher – <a href="https://www.ihp-lab.org/">Intelligent Human Perception Lab</a>, <a href="https://ict.usc.edu/">Institute for Creative Technologies</a></p>
                 </div>
             </div>
             <div class="education-item">
@@ -1186,8 +1372,8 @@
                     <img src="imgs/iitr_logo.png" alt="IIT Roorkee Logo">
                 </div>
                 <div class="education-content">
-                    <p><strong>Indian Institute of Technology Roorkee</strong> – BS, Computer Science (2017 - 2021), GPA: 9.718/10</p>
-                    <p>Chair - <a href="http://iitr.acm.org/#/">ACM IIT Roorke Chapter</a> | Co-President - <a href="https://vlgiitr.github.io/">Vision and Language Group</a></p>
+            <p><strong>Indian Institute of Technology Roorkee</strong> – BS, Computer Science (2017 - 2021), GPA: 9.718/10</p>
+            <p>Chair - <a href="http://iitr.acm.org/#/">ACM IIT Roorke Chapter</a> | Co-President - <a href="https://vlgiitr.github.io/">Vision and Language Group</a></p>
                 </div>
             </div>
         </section>
@@ -1203,16 +1389,29 @@
         </footer>
 
         <script>
-            // Scroll reveal animation
+            // Scroll progress indicator
+            (function() {
+                const scrollProgress = document.querySelector('.scroll-progress');
+                window.addEventListener('scroll', () => {
+                    const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    const scrolled = (window.scrollY / windowHeight) * 100;
+                    scrollProgress.style.width = scrolled + '%';
+                });
+            })();
+
+
+            // Elegant scroll reveal animation
             const observerOptions = {
                 threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
+                rootMargin: '0px 0px -80px 0px'
             };
 
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
+                        // Smooth fade-in with gentle movement
+                        entry.target.style.animation = 'elegantFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards';
                     }
                 });
             }, observerOptions);
@@ -1248,7 +1447,9 @@
                 allowedTags.sort().forEach(tag => {
                     const btn = document.createElement('button');
                     btn.className = 'tag-filter-btn'; // Not active by default
-                    btn.textContent = tag;
+                    const span = document.createElement('span');
+                    span.textContent = tag;
+                    btn.appendChild(span);
                     btn.setAttribute('data-tag', tag);
                     btn.addEventListener('click', () => toggleTag(tag, btn));
                     tagFiltersContainer.appendChild(btn);
@@ -1330,9 +1531,26 @@
                             badge.appendChild(starIcon);
                             pub.appendChild(badge);
                         }
+                        
                     }
                 });
             })();
+
+            // Add smooth scroll with offset for better UX
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        const offsetTop = target.offsetTop - 20;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
         </script>
 
         <!-- <script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=lFqDk8RzzqBEM1YJcP38LyHOz3JOjUESG7EdZEJEpqs"></script> -->
