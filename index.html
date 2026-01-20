@@ -915,11 +915,30 @@
             justify-content: center;
             align-items: center;
             width: 100%;
-            max-width: 600px;
-            margin: 30px auto;
-            padding: 20px;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 15px;
             overflow: hidden;
             position: relative;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+        }
+
+        .visitor-widget-container:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-color: #d1d5db;
+        }
+
+        /* Remove underlines from links within widget */
+        .visitor-widget-container a,
+        .visitor-widget-container a:hover,
+        .visitor-widget-container a:focus,
+        .visitor-widget-container a:visited {
+            text-decoration: none !important;
+            border-bottom: none !important;
         }
 
         /* Target the mapmyvisitors widget and its dynamically created elements */
@@ -935,7 +954,7 @@
         /* Less aggressive rules for elements outside container */
         iframe[src*="mapmyvisitors"],
         iframe[src*="mapmyvisitors.com"] {
-            max-width: 600px !important;
+            max-width: 400px !important;
             box-sizing: border-box !important;
         }
 
@@ -950,7 +969,7 @@
         body > iframe[src*="mapmyvisitors"],
         body > iframe[src*="mapmyvisitors.com"],
         body > div[id*="mapmyvisitors"] {
-            max-width: 600px !important;
+            max-width: 400px !important;
             margin-left: auto !important;
             margin-right: auto !important;
             display: block !important;
@@ -1499,6 +1518,10 @@
             <p>My hobbies include cooking and playing guitar. I am obsessed with the songs of <a href="https://open.spotify.com/artist/0tC995Rfn9k2l7nqgCZsV7">Prateek Kuhad</a> and <a href="https://open.spotify.com/artist/4gdMJYnopf2nEUcanAwstx">Anuv Jain</a>.</p>
         </section> -->
 
+        <div class="visitor-widget-container reveal" id="visitor-widget-wrapper">
+            <script type="text/javascript" id="mapmyvisitors" src="https://mapmyvisitors.com/map.js?d=VZzUILpQp5ixeMP7b9mnzRYjT2O73z-76noqpPjzGzk&cl=ffffff&w=a"></script>
+        </div>
+
         <footer class="reveal">
             <p>Feel free to use this template from my <a href="https://github.com/ac-alpha/ac-alpha.github.io">GitHub</a>.</p>
         </footer>
@@ -1703,10 +1726,6 @@
                     });
             </script>
         </footer> -->
-    </div>
-
-    <div class="visitor-widget-container" id="visitor-widget-wrapper">
-        <script type="text/javascript" id="mapmyvisitors" src="https://mapmyvisitors.com/map.js?d=VZzUILpQp5ixeMP7b9mnzRYjT2O73z-76noqpPjzGzk&cl=ffffff&w=a"></script>
     </div>
     
     <script>
