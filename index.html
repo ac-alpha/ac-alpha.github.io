@@ -909,6 +909,45 @@
             color: #6b7280;
         }
 
+        /* Visitor widget container */
+        .visitor-widget-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        /* Target the mapmyvisitors widget and its dynamically created elements */
+        #mapmyvisitors,
+        #mapmyvisitors iframe,
+        #mapmyvisitors > div,
+        #mapmyvisitors > *,
+        iframe[src*="mapmyvisitors"],
+        iframe[src*="mapmyvisitors.com"] {
+            max-width: 100% !important;
+            width: 100% !important;
+            box-sizing: border-box;
+        }
+
+        /* Ensure the widget script container doesn't overflow */
+        #mapmyvisitors {
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Target any divs or iframes created by mapmyvisitors at body level */
+        body > iframe[src*="mapmyvisitors"],
+        body > iframe[src*="mapmyvisitors.com"] {
+            max-width: 600px !important;
+            width: 100% !important;
+            margin: 0 auto !important;
+            display: block !important;
+        }
+
         /* News section styling */
         .news-container {
             background: #ffffff;
@@ -1655,7 +1694,31 @@
         </footer> -->
     </div>
 
-    <script type="text/javascript" id="mapmyvisitors" src="https://mapmyvisitors.com/map.js?d=VZzUILpQp5ixeMP7b9mnzRYjT2O73z-76noqpPjzGzk&cl=ffffff&w=a"></script>
+    <div class="visitor-widget-container" id="visitor-widget-wrapper">
+        <script type="text/javascript" id="mapmyvisitors" src="https://mapmyvisitors.com/map.js?d=VZzUILpQp5ixeMP7b9mnzRYjT2O73z-76noqpPjzGzk&cl=ffffff&w=a"></script>
+    </div>
+    
+    <script>
+        // Constrain widget size after it loads
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                // Find and resize any iframes or divs created by mapmyvisitors
+                const iframes = document.querySelectorAll('iframe[src*="mapmyvisitors"]');
+                iframes.forEach(function(iframe) {
+                    iframe.style.maxWidth = '100%';
+                    iframe.style.width = '100%';
+                });
+                
+                // Also check for any divs that might contain the widget
+                const widgetDivs = document.querySelectorAll('div[id*="mapmyvisitors"], div[class*="mapmyvisitors"]');
+                widgetDivs.forEach(function(div) {
+                    div.style.maxWidth = '600px';
+                    div.style.width = '100%';
+                    div.style.margin = '0 auto';
+                });
+            }, 1500);
+        });
+    </script>
 </body>
 
 </html>
