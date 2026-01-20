@@ -919,33 +919,44 @@
             margin: 30px auto;
             padding: 20px;
             overflow: hidden;
+            position: relative;
         }
 
         /* Target the mapmyvisitors widget and its dynamically created elements */
-        #mapmyvisitors,
-        #mapmyvisitors iframe,
-        #mapmyvisitors > div,
-        #mapmyvisitors > *,
+        .visitor-widget-container iframe,
+        .visitor-widget-container > div:not(.visitor-widget-container),
+        .visitor-widget-container > *:not(script) {
+            max-width: 100% !important;
+            box-sizing: border-box !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+        
+        /* Less aggressive rules for elements outside container */
         iframe[src*="mapmyvisitors"],
         iframe[src*="mapmyvisitors.com"] {
-            max-width: 100% !important;
-            width: 100% !important;
-            box-sizing: border-box;
+            max-width: 600px !important;
+            box-sizing: border-box !important;
         }
 
         /* Ensure the widget script container doesn't overflow */
         #mapmyvisitors {
             display: block;
             margin: 0 auto;
+            width: 100%;
         }
 
         /* Target any divs or iframes created by mapmyvisitors at body level */
         body > iframe[src*="mapmyvisitors"],
-        body > iframe[src*="mapmyvisitors.com"] {
+        body > iframe[src*="mapmyvisitors.com"],
+        body > div[id*="mapmyvisitors"] {
             max-width: 600px !important;
-            width: 100% !important;
-            margin: 0 auto !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
             display: block !important;
+            position: relative !important;
+            left: auto !important;
+            right: auto !important;
         }
 
         /* News section styling */
@@ -1699,24 +1710,90 @@
     </div>
     
     <script>
-        // Constrain widget size after it loads
+        // Function to fix widget position (only fix positioning, preserve natural width)
+        function fixWidgetPosition() {
+            const container = document.getElementById('visitor-widget-wrapper');
+            if (!container) return;
+            
+            // Find and fix any iframes created by mapmyvisitors
+            const iframes = document.querySelectorAll('iframe[src*="mapmyvisitors"]');
+            iframes.forEach(function(iframe) {
+                // Move iframe into container if it's outside
+                if (!container.contains(iframe)) {
+                    container.appendChild(iframe);
+                }
+                // Only fix positioning if it's wrong, preserve width
+                const computedStyle = window.getComputedStyle(iframe);
+                const rect = iframe.getBoundingClientRect();
+                const containerRect = container.getBoundingClientRect();
+                
+                // Fix if positioned incorrectly (moved to right) or too wide
+                if (rect.left > containerRect.left + 50 || iframe.offsetWidth > container.offsetWidth) {
+                    iframe.style.maxWidth = '100%';
+                    iframe.style.marginLeft = 'auto';
+                    iframe.style.marginRight = 'auto';
+                    iframe.style.position = 'relative';
+                    iframe.style.left = 'auto';
+                    iframe.style.right = 'auto';
+                }
+            });
+            
+            // Find and fix any divs created by mapmyvisitors
+            const widgetDivs = document.querySelectorAll('div[id*="mapmyvisitors"], div[class*="mapmyvisitors"]');
+            widgetDivs.forEach(function(div) {
+                if (div === container) return;
+                
+                // Move div into container if it's outside
+                if (!container.contains(div)) {
+                    container.appendChild(div);
+                }
+                
+                // Only fix positioning if it's wrong, preserve width
+                const computedStyle = window.getComputedStyle(div);
+                const rect = div.getBoundingClientRect();
+                const containerRect = container.getBoundingClientRect();
+                
+                // Fix if positioned incorrectly (moved to right) or too wide
+                if (rect.left > containerRect.left + 50 || div.offsetWidth > container.offsetWidth) {
+                    div.style.maxWidth = '100%';
+                    div.style.marginLeft = 'auto';
+                    div.style.marginRight = 'auto';
+                    div.style.position = 'relative';
+                    div.style.left = 'auto';
+                    div.style.right = 'auto';
+                }
+            });
+        }
+        
+        // Run after load with delays to catch widget's own JavaScript changes
+        window.addEventListener('load', function() {
+            setTimeout(fixWidgetPosition, 1000);
+            setTimeout(fixWidgetPosition, 2500);
+        });
+        
+        // Use MutationObserver to watch for style changes (less frequent)
+        const widgetObserver = new MutationObserver(function(mutations) {
+            let shouldFix = false;
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                    shouldFix = true;
+                }
+            });
+            if (shouldFix) {
+                setTimeout(fixWidgetPosition, 100);
+            }
+        });
+        
+        // Start observing after page loads
         window.addEventListener('load', function() {
             setTimeout(function() {
-                // Find and resize any iframes or divs created by mapmyvisitors
-                const iframes = document.querySelectorAll('iframe[src*="mapmyvisitors"]');
-                iframes.forEach(function(iframe) {
-                    iframe.style.maxWidth = '100%';
-                    iframe.style.width = '100%';
+                widgetObserver.observe(document.body, {
+                    childList: true,
+                    subtree: true,
+                    attributes: true,
+                    attributeFilter: ['style']
                 });
-                
-                // Also check for any divs that might contain the widget
-                const widgetDivs = document.querySelectorAll('div[id*="mapmyvisitors"], div[class*="mapmyvisitors"]');
-                widgetDivs.forEach(function(div) {
-                    div.style.maxWidth = '600px';
-                    div.style.width = '100%';
-                    div.style.margin = '0 auto';
-                });
-            }, 1500);
+            }, 2000);
         });
     </script>
 </body>
