@@ -1,0 +1,627 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery – Ashutosh Chaubey</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Georgia', 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);
+            background-attachment: fixed;
+            color: #333;
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, #2563eb, #3b82f6, #8b5cf6);
+            z-index: 9999;
+            transition: width 0.1s ease;
+            box-shadow: 0 2px 10px rgba(37, 99, 235, 0.3);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 30px 60px;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.05);
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0 25px;
+            border-bottom: 2px solid #e8e8e8;
+            position: relative;
+            margin-bottom: 0;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #2563eb, #3b82f6);
+            border-radius: 2px;
+        }
+
+        header h1 {
+            font-size: 2.8em;
+            color: #1a1a1a;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+            margin-bottom: 10px;
+            opacity: 0;
+            animation: fadeInDown 0.8s ease-out 0.2s forwards;
+            display: inline-block;
+            cursor: default;
+            transition: transform 0.3s ease;
+        }
+
+        header h1:hover { transform: scale(1.05); }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 10px;
+            font-size: 1em;
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(37, 99, 235, 0.3);
+            padding-bottom: 2px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            color: #1e40af;
+            border-bottom-color: #2563eb;
+            border-bottom-width: 2px;
+        }
+
+        /* Gallery grid */
+        .gallery-section {
+            padding: 30px 0;
+        }
+
+        .gallery-section h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+            position: relative;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .gallery-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, #2563eb, #3b82f6);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        .gallery-item {
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gallery-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gallery-item:hover {
+            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.15);
+            transform: translateY(-6px);
+            border-color: #94a3b8;
+        }
+
+        .gallery-item-img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            overflow: hidden;
+            background: #f1f5f9;
+            border-radius: 8px 8px 0 0;
+            flex-shrink: 0;
+        }
+
+        .gallery-item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gallery-item:hover .gallery-item-img img {
+            transform: scale(1.06);
+        }
+
+        .gallery-item-info {
+            padding: 14px 16px;
+        }
+
+        .gallery-item-caption {
+            font-size: 1.05em;
+            color: #1a1a1a;
+            font-weight: 500;
+            line-height: 1.4;
+            margin-bottom: 4px;
+        }
+
+        .gallery-item-date {
+            font-size: 0.88em;
+            color: #6b7280;
+        }
+
+        .gallery-item-location {
+            font-size: 0.88em;
+            color: #6b7280;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 2px;
+        }
+
+        .gallery-item-location i {
+            font-size: 0.85em;
+            color: #2563eb;
+        }
+
+        .gallery-item-paper {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 8px;
+            padding: 4px 10px;
+            font-size: 0.82em;
+            font-weight: 500;
+            color: #2563eb;
+            background: rgba(37, 99, 235, 0.08);
+            border: 1px solid rgba(37, 99, 235, 0.15);
+            border-radius: 14px;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .gallery-item-paper:hover {
+            background: rgba(37, 99, 235, 0.15);
+            border-color: rgba(37, 99, 235, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .gallery-item-paper i {
+            font-size: 0.9em;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.88);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox.open {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .lightbox-content img {
+            max-width: 90vw;
+            max-height: 78vh;
+            border-radius: 6px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            object-fit: contain;
+        }
+
+        .lightbox-caption {
+            color: #fff;
+            text-align: center;
+            margin-top: 16px;
+            font-size: 1.1em;
+            max-width: 600px;
+        }
+
+        .lightbox-caption .lb-date {
+            display: block;
+            font-size: 0.85em;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
+
+        .lightbox-caption .lb-location {
+            display: block;
+            font-size: 0.85em;
+            color: #94a3b8;
+            margin-top: 2px;
+        }
+
+        .lightbox-caption .lb-location i {
+            margin-right: 4px;
+            font-size: 0.9em;
+        }
+
+        .lightbox-caption .lb-paper {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 10px;
+            padding: 5px 14px;
+            font-size: 0.85em;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 16px;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .lightbox-caption .lb-paper:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 28px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s, transform 0.2s;
+            padding: 4px 8px;
+        }
+
+        .lightbox-close:hover { opacity: 1; transform: scale(1.15); }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            font-size: 22px;
+            cursor: pointer;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        .lightbox-nav:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        .lightbox-prev { left: -70px; }
+        .lightbox-next { right: -70px; }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #777;
+            margin-top: 40px;
+            border-top: 2px solid #e5e7eb;
+            font-size: 0.95em;
+            background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(249,250,251,1) 100%);
+        }
+
+        footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(37, 99, 235, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #1e40af;
+            border-bottom-color: #2563eb;
+            border-bottom-width: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 15px 40px; }
+            header h1 { font-size: 2.2em; }
+            .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+            .lightbox-prev { left: 8px; }
+            .lightbox-next { right: 8px; }
+            .lightbox-nav { width: 40px; height: 40px; font-size: 18px; }
+            .lightbox-content img { max-width: 95vw; max-height: 70vh; }
+            .lightbox-close { top: -36px; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="scroll-progress"></div>
+
+    <div class="container">
+        <header>
+            <h1>Gallery</h1>
+            <br>
+            <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+        </header>
+
+        <section class="gallery-section">
+            <h2>Photos</h2>
+
+            <!--
+                HOW TO ADD IMAGES:
+                Copy a <div class="gallery-item"> block and update:
+                  - data-caption:    lightbox caption text
+                  - data-date:       date shown on card and lightbox
+                  - data-location:   location shown on card and lightbox
+                  - data-link:       (optional) URL to a related paper
+                  - data-link-label: (optional) short label for the paper link
+                  - src/alt:         image path and accessibility text
+            -->
+
+            <div class="gallery-grid" id="galleryGrid">
+
+                <div class="gallery-item"
+                     data-caption="I presented our work on using multimodal LLMs for facial analysis at WACV 2026 in Tucson."
+                     data-date="March 2026"
+                     data-location="Tucson, AZ"
+                     data-link="https://arxiv.org/abs/2504.07198"
+                     data-link-label="Face-LLaVA">
+                    <div class="gallery-item-img">
+                        <img src="imgs/gallery/wacv_poster_2026.JPG" alt="Poster presentation at WACV 2026 in Tucson" loading="lazy">
+                    </div>
+                    <div class="gallery-item-info">
+                        <p class="gallery-item-caption">Poster presentation at WACV 2026</p>
+                        <p class="gallery-item-date">March 2026</p>
+                        <p class="gallery-item-location"><i class="fa-solid fa-location-dot"></i> Tucson, AZ</p>
+                        <a href="https://arxiv.org/abs/2504.07198" class="gallery-item-paper" target="_blank" onclick="event.stopPropagation()"><i class="fa-solid fa-file-lines"></i> Face-LLaVA</a>
+                    </div>
+                </div>
+
+                <div class="gallery-item"
+                     data-caption="I attended NeurIPS 2025 at San Diego. It was a pleasure connecting with old friends and making new ones!"
+                     data-date="December 2025"
+                     data-location="San Diego, CA">
+                    <div class="gallery-item-img">
+                        <img src="imgs/gallery/neurips_attending.jpg" alt="NeurIPS 2025 at San Diego" loading="lazy">
+                    </div>
+                    <div class="gallery-item-info">
+                        <p class="gallery-item-caption">NeurIPS 2025</p>
+                        <p class="gallery-item-date">December 2025</p>
+                        <p class="gallery-item-location"><i class="fa-solid fa-location-dot"></i> San Diego, CA</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item"
+                     data-caption="I joined the Institute for Creative Technologies at USC as a PhD student. I will be working with Prof. Mohammad Soleymani on multimodal social and emotion understanding."
+                     data-date="August 2024"
+                     data-location="Los Angeles, CA">
+                    <div class="gallery-item-img">
+                        <img src="imgs/gallery/ict_seat_image.jpg" alt="Joining ICT at USC" loading="lazy">
+                    </div>
+                    <div class="gallery-item-info">
+                        <p class="gallery-item-caption">Joining ICT at USC</p>
+                        <p class="gallery-item-date">August 2024</p>
+                        <p class="gallery-item-location"><i class="fa-solid fa-location-dot"></i> Los Angeles, CA</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item"
+                     data-caption="Me presenting our work on imposter identification in speaker recognition at ASRU 2023 in Taipei."
+                     data-date="December 2023"
+                     data-location="Taipei, Taiwan"
+                     data-link="https://arxiv.org/abs/2306.00952"
+                     data-link-label="Meta-Learning Speaker ID">
+                    <div class="gallery-item-img">
+                        <img src="imgs/gallery/asru_poster_2023.jpg" alt="Poster presentation at ASRU 2023 in Taipei" loading="lazy">
+                    </div>
+                    <div class="gallery-item-info">
+                        <p class="gallery-item-caption">Poster presentation at ASRU 2023</p>
+                        <p class="gallery-item-date">December 2023</p>
+                        <p class="gallery-item-location"><i class="fa-solid fa-location-dot"></i> Taipei, Taiwan</p>
+                        <a href="https://arxiv.org/abs/2306.00952" class="gallery-item-paper" target="_blank" onclick="event.stopPropagation()"><i class="fa-solid fa-file-lines"></i> Meta-Learning Speaker ID</a>
+                    </div>
+                </div>
+
+                <div class="gallery-item"
+                     data-caption="Presenting our work on improved relation networks for speaker verification and identification at Interspeech 2022 in Incheon."
+                     data-date="September 2022"
+                     data-location="Incheon, South Korea"
+                     data-link="https://arxiv.org/abs/2203.17218"
+                     data-link-label="Improved Relation Networks">
+                    <div class="gallery-item-img">
+                        <img src="imgs/gallery/interspeech_badge.jpg" alt="Presenting at Interspeech 2022 in Incheon, South Korea" loading="lazy">
+                    </div>
+                    <div class="gallery-item-info">
+                        <p class="gallery-item-caption">Presenting at Interspeech 2022</p>
+                        <p class="gallery-item-date">September 2022</p>
+                        <p class="gallery-item-location"><i class="fa-solid fa-location-dot"></i> Incheon, South Korea</p>
+                        <a href="https://arxiv.org/abs/2203.17218" class="gallery-item-paper" target="_blank" onclick="event.stopPropagation()"><i class="fa-solid fa-file-lines"></i> Improved Relation Networks</a>
+                    </div>
+                </div>
+
+                <div class="gallery-item"
+                     data-caption="I received the Institute Bronze Medal for securing the 3rd highest GPA among all the graduating students of the 2021 batch at IIT Roorkee. "
+                     data-date="September 2021"
+                     data-location="Roorkee, India">
+                    <div class="gallery-item-img">
+                        <img src="imgs/gallery/bronze_medal_image.jpeg" alt="Received Institute Bronze Medal at IIT Roorkee in 2021" loading="lazy">
+                    </div>
+                    <div class="gallery-item-info">
+                        <p class="gallery-item-caption">Received Bronze Medal at IIT Roorkee (Online Ceremony)</p>
+                        <p class="gallery-item-date">September 2021</p>
+                        <p class="gallery-item-location"><i class="fa-solid fa-location-dot"></i> Roorkee, India</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <footer>
+            <p>Feel free to use this template from my <a href="https://github.com/ac-alpha/ac-alpha.github.io">GitHub</a>.</p>
+        </footer>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+            <button class="lightbox-nav lightbox-prev" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+            <img id="lightboxImg" src="" alt="">
+            <button class="lightbox-nav lightbox-next" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
+            <div class="lightbox-caption">
+                <span id="lightboxCaption"></span>
+                <span class="lb-date" id="lightboxDate"></span>
+                <span class="lb-location" id="lightboxLocation"></span>
+                <a class="lb-paper" id="lightboxPaper" href="#" target="_blank" style="display:none" onclick="event.stopPropagation()"><i class="fa-solid fa-file-lines"></i> <span id="lightboxPaperLabel"></span></a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Scroll progress
+        (function() {
+            const bar = document.querySelector('.scroll-progress');
+            window.addEventListener('scroll', () => {
+                const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                bar.style.width = (window.scrollY / h) * 100 + '%';
+            });
+        })();
+
+        // Staggered fade-in on scroll
+        (function() {
+            const items = document.querySelectorAll('.gallery-item');
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach((e, i) => {
+                    if (e.isIntersecting) {
+                        setTimeout(() => e.target.classList.add('visible'), i * 80);
+                        io.unobserve(e.target);
+                    }
+                });
+            }, { threshold: 0.05 });
+            items.forEach(el => io.observe(el));
+        })();
+
+        // Lightbox
+        (function() {
+            const lb = document.getElementById('lightbox');
+            const lbImg = document.getElementById('lightboxImg');
+            const lbCaption = document.getElementById('lightboxCaption');
+            const lbDate = document.getElementById('lightboxDate');
+            const lbLocation = document.getElementById('lightboxLocation');
+            const lbPaper = document.getElementById('lightboxPaper');
+            const lbPaperLabel = document.getElementById('lightboxPaperLabel');
+            const items = Array.from(document.querySelectorAll('.gallery-item'));
+            let idx = 0;
+
+            function show(i) {
+                idx = (i + items.length) % items.length;
+                const item = items[idx];
+                lbImg.src = item.querySelector('img').src;
+                lbImg.alt = item.querySelector('img').alt;
+                lbCaption.textContent = item.dataset.caption || '';
+                lbDate.textContent = item.dataset.date || '';
+
+                const loc = item.dataset.location;
+                if (loc) {
+                    lbLocation.innerHTML = '<i class="fa-solid fa-location-dot"></i> ' + loc;
+                    lbLocation.style.display = '';
+                } else {
+                    lbLocation.style.display = 'none';
+                }
+
+                const link = item.dataset.link;
+                const linkLabel = item.dataset.linkLabel;
+                if (link) {
+                    lbPaper.href = link;
+                    lbPaperLabel.textContent = linkLabel || 'Paper';
+                    lbPaper.style.display = '';
+                } else {
+                    lbPaper.style.display = 'none';
+                }
+            }
+
+            items.forEach((item, i) => {
+                item.addEventListener('click', () => { show(i); lb.classList.add('open'); });
+            });
+
+            lb.querySelector('.lightbox-close').addEventListener('click', () => lb.classList.remove('open'));
+            lb.querySelector('.lightbox-prev').addEventListener('click', (e) => { e.stopPropagation(); show(idx - 1); });
+            lb.querySelector('.lightbox-next').addEventListener('click', (e) => { e.stopPropagation(); show(idx + 1); });
+
+            lb.addEventListener('click', (e) => { if (e.target === lb) lb.classList.remove('open'); });
+
+            document.addEventListener('keydown', (e) => {
+                if (!lb.classList.contains('open')) return;
+                if (e.key === 'Escape') lb.classList.remove('open');
+                if (e.key === 'ArrowLeft') show(idx - 1);
+                if (e.key === 'ArrowRight') show(idx + 1);
+            });
+        })();
+    </script>
+</body>
+
+</html>
