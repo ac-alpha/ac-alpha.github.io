@@ -1,0 +1,611 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publications – Ashutosh Chaubey</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Georgia', 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);
+            background-attachment: fixed;
+            color: #333;
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, #2563eb, #3b82f6, #8b5cf6);
+            z-index: 9999;
+            transition: width 0.1s ease;
+            box-shadow: 0 2px 10px rgba(37, 99, 235, 0.3);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 30px 60px;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.05);
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0 25px;
+            border-bottom: 2px solid #e8e8e8;
+            position: relative;
+            margin-bottom: 0;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #2563eb, #3b82f6);
+            border-radius: 2px;
+        }
+
+        header h1 {
+            font-size: 2.8em;
+            color: #1a1a1a;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+            margin-bottom: 10px;
+            opacity: 0;
+            animation: fadeInDown 0.8s ease-out 0.2s forwards;
+            display: inline-block;
+            cursor: default;
+            transition: transform 0.3s ease;
+        }
+
+        header h1:hover { transform: scale(1.05); }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        a {
+            text-decoration: none;
+            color: #2563eb;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        a:hover { color: #1e40af; }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 10px;
+            font-size: 1em;
+            color: #2563eb;
+            border-bottom: 1px solid rgba(37, 99, 235, 0.3);
+            padding-bottom: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #1e40af;
+            border-bottom-color: #2563eb;
+            border-bottom-width: 2px;
+        }
+
+        .pub-section {
+            padding: 30px 0 0;
+        }
+
+        .pub-section h2 {
+            font-size: 2em;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+            position: relative;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .pub-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, #2563eb, #3b82f6);
+        }
+
+        .pub-note {
+            font-size: 0.95em;
+            color: #6b7280;
+            margin-bottom: 16px;
+            font-style: italic;
+        }
+
+        /* Tag filter */
+        .tag-filter-container {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .tag-filter-container h4 {
+            font-size: 1.05em;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .tag-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag-filter-btn {
+            padding: 6px 14px;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 20px;
+            font-size: 0.88em;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-weight: 500;
+            font-family: inherit;
+            user-select: none;
+        }
+
+        .tag-filter-btn:hover {
+            background: #f1f5f9;
+            border-color: #94a3b8;
+            transform: translateY(-1px);
+        }
+
+        .tag-filter-btn.active {
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            color: #ffffff;
+            border-color: #2563eb;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+        }
+
+        .tag-filter-btn.active:hover {
+            background: linear-gradient(135deg, #1e40af, #2563eb);
+        }
+
+        /* Publication entries */
+        .pub-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .pub-entry {
+            padding: 18px 0;
+            border-bottom: 1px solid #f1f3f5;
+            transition: opacity 0.3s ease;
+        }
+
+        .pub-entry:last-child { border-bottom: none; }
+        .pub-entry.hidden { display: none; }
+
+        .pub-title {
+            font-size: 1.12em;
+            font-weight: 600;
+            color: #1a1a1a;
+            line-height: 1.4;
+            margin-bottom: 4px;
+        }
+
+        .pub-authors {
+            font-size: 0.95em;
+            color: #555;
+            margin-bottom: 4px;
+            line-height: 1.5;
+        }
+
+        .pub-authors strong { color: #1a1a1a; }
+
+        .pub-venue {
+            font-size: 0.92em;
+            color: #dc2626;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .pub-links {
+            font-size: 0.92em;
+            color: #555;
+            margin-top: 4px;
+        }
+
+        .pub-links a {
+            font-size: inherit;
+            color: #2563eb;
+            font-weight: 500;
+            border-bottom: 1px solid rgba(37, 99, 235, 0.3);
+            padding-bottom: 1px;
+            transition: all 0.2s ease;
+        }
+
+        .pub-links a:hover {
+            color: #1e40af;
+            border-bottom-color: #2563eb;
+        }
+
+        .pub-links .sep {
+            color: #9ca3af;
+            margin: 0 2px;
+        }
+
+        .pub-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .pub-tag {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-size: 0.8em;
+            font-weight: 500;
+            border: 1px solid;
+        }
+
+        .pub-tag.tag-cv { background: rgba(37, 99, 235, 0.08); color: #2563eb; border-color: rgba(37, 99, 235, 0.18); }
+        .pub-tag.tag-multimodal-llms { background: rgba(236, 72, 153, 0.08); color: #ec4899; border-color: rgba(236, 72, 153, 0.18); }
+        .pub-tag.tag-rl { background: rgba(245, 158, 11, 0.08); color: #f59e0b; border-color: rgba(245, 158, 11, 0.18); }
+        .pub-tag.tag-audio { background: rgba(34, 197, 94, 0.08); color: #22c55e; border-color: rgba(34, 197, 94, 0.18); }
+        .pub-tag.tag-face { background: rgba(168, 85, 247, 0.08); color: #a855f7; border-color: rgba(168, 85, 247, 0.18); }
+        .pub-tag.tag-video { background: rgba(239, 68, 68, 0.08); color: #ef4444; border-color: rgba(239, 68, 68, 0.18); }
+
+        .year-heading {
+            font-size: 1.3em;
+            color: #1a1a1a;
+            font-weight: 400;
+            margin-top: 28px;
+            margin-bottom: 4px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #e5e7eb;
+            transition: opacity 0.3s ease;
+        }
+
+        .year-heading.hidden { display: none; }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #777;
+            margin-top: 40px;
+            border-top: 2px solid #e5e7eb;
+            font-size: 0.95em;
+        }
+
+        footer a {
+            color: #2563eb;
+            border-bottom: 1px solid rgba(37, 99, 235, 0.3);
+        }
+
+        footer a:hover {
+            color: #1e40af;
+            border-bottom-color: #2563eb;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 15px 40px; }
+            header h1 { font-size: 2.2em; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="scroll-progress"></div>
+
+    <div class="container">
+        <header>
+            <h1>Publications</h1>
+            <br>
+            <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+        </header>
+
+        <section class="pub-section">
+            <h2>Research & Publications</h2>
+            <p class="pub-note">* denotes equal contribution. My name is in <strong>bold</strong>.</p>
+
+            <div class="tag-filter-container">
+                <h4>Filter by topic:</h4>
+                <div class="tag-filters" id="tagFilters"></div>
+            </div>
+
+            <h3 class="year-heading" data-year="2026">2026</h3>
+            <ol class="pub-list">
+
+                <li class="pub-entry" data-tags="Multimodal LLMs, Computer Vision, Reinforcement Learning, Audio">
+                    <div class="pub-title">MoD-DPO: Towards Mitigating Cross-modal Hallucinations in Omni LLMs using Modality Decoupled Preference Optimization</div>
+                    <div class="pub-authors"><strong>Ashutosh Chaubey</strong>, Jiacheng Pang, Mohammad Soleymani</div>
+                    <div class="pub-venue">CVPR, 2026</div>
+                    <div class="pub-links"><a href="https://arxiv.org/abs/2603.03192">arXiv</a> <span class="sep">/</span> <a href="https://mod-dpo.github.io/">Project Page</a></div>
+                    <div class="pub-tags">
+                        <span class="pub-tag tag-multimodal-llms">Multimodal LLMs</span>
+                        <span class="pub-tag tag-cv">Computer Vision</span>
+                        <span class="pub-tag tag-rl">Reinforcement Learning</span>
+                        <span class="pub-tag tag-audio">Audio</span>
+                    </div>
+                </li>
+
+                <li class="pub-entry" data-tags="Multimodal LLMs, Computer Vision, Reinforcement Learning, Audio">
+                    <div class="pub-title">AVERE: Improving Audiovisual Emotion Reasoning with Preference Optimization</div>
+                    <div class="pub-authors"><strong>Ashutosh Chaubey</strong>, Jiacheng Pang, Maksim Siniukov, Mohammad Soleymani</div>
+                    <div class="pub-venue">ICLR, 2026</div>
+                    <div class="pub-links"><a href="https://openreview.net/forum?id=td682AAuPr">Paper</a> <span class="sep">/</span> <a href="https://arxiv.org/abs/2602.07054">arXiv</a> <span class="sep">/</span> <a href="https://github.com/ihp-lab/AVERE">Code</a> <span class="sep">/</span> <a href="https://huggingface.co/chaubeyG/AVERE-7B">Weights</a> <span class="sep">/</span> <a href="https://huggingface.co/datasets/chaubeyG/EmoReAlM">Benchmark</a> <span class="sep">/</span> <a href="https://avere-iclr.github.io/">Project Page</a></div>
+                    <div class="pub-tags">
+                        <span class="pub-tag tag-multimodal-llms">Multimodal LLMs</span>
+                        <span class="pub-tag tag-cv">Computer Vision</span>
+                        <span class="pub-tag tag-rl">Reinforcement Learning</span>
+                        <span class="pub-tag tag-audio">Audio</span>
+                    </div>
+                </li>
+
+                <li class="pub-entry" data-tags="Computer Vision, Face Analysis">
+                    <div class="pub-title">LibreFace 2.0: Leveraging Large-Scale Synthetic Data for Fair and Generalizable Facial Analysis</div>
+                    <div class="pub-authors">Xulang Guan*, <strong>Ashutosh Chaubey*</strong>, Maksim Siniukov, Belle Hsieh, Zongjian Li, Mohammad Soleymani</div>
+                    <div class="pub-venue">FG, 2026 (Round 1)</div>
+                    <div class="pub-links"><a href="https://github.com/ihp-lab/LibreFace">Code</a></div>
+                    <div class="pub-tags">
+                        <span class="pub-tag tag-cv">Computer Vision</span>
+                        <span class="pub-tag tag-face">Face Analysis</span>
+                    </div>
+                </li>
+
+                <li class="pub-entry" data-tags="Multimodal LLMs, Computer Vision, Face Analysis">
+                    <div class="pub-title">Face-LLaVA: Facial Expression and Attribute Understanding through Instruction Tuning</div>
+                    <div class="pub-authors"><strong>Ashutosh Chaubey</strong>, Xulang Guan, Mohammad Soleymani</div>
+                    <div class="pub-venue">WACV, 2026 (Round 1)</div>
+                    <div class="pub-links"><a href="https://openaccess.thecvf.com/content/WACV2026/html/Chaubey_Face-LLaVA_Facial_Expression_and_Attribute_Understanding_through_Instruction_Tuning_WACV_2026_paper.html">Paper</a> <span class="sep">/</span> <a href="https://arxiv.org/abs/2504.07198">arXiv</a> <span class="sep">/</span> <a href="https://github.com/ihp-lab/Face-LLaVA">Code</a> <span class="sep">/</span> <a href="https://huggingface.co/chaubeyG/FaceLLaVA">Weights</a> <span class="sep">/</span> <a href="https://huggingface.co/datasets/chaubeyG/FaceInstruct1M/">Dataset</a> <span class="sep">/</span> <a href="https://face-llava.github.io/">Project Page</a></div>
+                    <div class="pub-tags">
+                        <span class="pub-tag tag-multimodal-llms">Multimodal LLMs</span>
+                        <span class="pub-tag tag-cv">Computer Vision</span>
+                        <span class="pub-tag tag-face">Face Analysis</span>
+                    </div>
+                </li>
+
+                <li class="pub-entry" data-tags="Multimodal LLMs">
+                    <div class="pub-title">Reasoning Improves Human Alignment in LLM Judgment and Choice</div>
+                    <div class="pub-authors">Ala N. Tak, Amin Banayeeanzade, Anahita Bolourani, Fatemeh Bahrani, <strong>Ashutosh Chaubey</strong>, Sai Praneeth Karimireddy, Norbert Schwarz, Jonathan Gratch</div>
+                    <div class="pub-venue">ICLR 2026 Workshop on Representational Alignment (Re^4-Align)</div>
+                    <div class="pub-links"><a href="https://openreview.net/forum?id=QRWpNSenUZ">Paper</a></div>
+                    <div class="pub-tags">
+                        <span class="pub-tag tag-multimodal-llms">Multimodal LLMs</span>
+                    </div>
+                </li>
+
+            </ol>
+
+            <h3 class="year-heading" data-year="2025">2025</h3>
+            <ol class="pub-list">
+
+                <li class="pub-entry" data-tags="Multimodal LLMs, Computer Vision">
+                    <div class="pub-title">Can VLMs Recall Factual Associations From Visual References?</div>
+                    <div class="pub-authors">Dhananjay Ashok, <strong>Ashutosh Chaubey</strong>, Hirona Arai, Jonathan May, Jesse Thomason</div>
+                    <div class="pub-venue">EMNLP (Findings), 2025</div>
+                    <div class="pub-links"><a href="https://aclanthology.org/2025.findings-emnlp.850/">Paper</a> <span class="sep">/</span> <a href="https://arxiv.org/abs/2508.18297">arXiv</a> <span class="sep">/</span> <a href="https://github.com/DhananjayAshok/VLM_Grounding">Code</a></div>
+                    <div class="pub-tags">
+                        <span class="pub-tag tag-multimodal-llms">Multimodal LLMs</span>
+                        <span class="pub-tag tag-cv">Computer Vision</span>
+                    </div>
+                </li>
+
+                <li class="pub-entry" data-tags="Computer Vision, Audio, Video Generation">
+                    <div class="pub-title">DiTaiListener: Controllable High Fidelity Listener Video Generation with Diffusion</div>
+                    <div class="pub-authors">Maksim Siniukov*, Di Chang*, Minh Tran, Hongkun Gong, <strong>Ashutosh Chaubey</strong>, Mohammad Soleymani</div>
+                    <div class="pub-venue">ICCV, 2025</div>
+                    <div class="pub-links"><a href="https://openaccess.thecvf.com/content/ICCV2025/html/Siniukov_DiTaiListener_Controllable_High_Fidelity_Listener_Video_Generation_with_Diffusion_ICCV_2025_paper.html">Paper</a> <span class="sep">/</span> <a href="https://arxiv.org/abs/2504.04010">arXiv</a> <span class="sep">/</span> <a href="https://cv.maxi.su/DiTaiListener/">Project Page</a></div>
+                    <div class="pub-tags">
+                        <span class="pub-tag tag-cv">Computer Vision</span>
+                        <span class="pub-tag tag-audio">Audio</span>
+                        <span class="pub-tag tag-video">Video Generation</span>
+                    </div>
+                </li>
+
+                <li class="pub-entry" data-tags="Multimodal LLMs, Computer Vision">
+                    <div class="pub-title">ContextIQ: A Multimodal Expert-Based Video Retrieval System for Contextual Advertising</div>
+                    <div class="pub-authors"><strong>Ashutosh Chaubey</strong>, Anoubhav Agarwaal, Sartaki Sinha Roy, Aayush Agrawal, Susmita Ghose</div>
+                    <div class="pub-venue">WACV, 2025</div>
+                    <div class="pub-links"><a href="https://openaccess.thecvf.com/content/WACV2025/html/Chaubey_ContextIQ_A_Multimodal_Expert-Based_Video_Retrieval_System_for_Contextual_Advertising_WACV_2025_paper.html">Paper</a> <span class="sep">/</span> <a href="https://arxiv.org/abs/2410.22233">arXiv</a> <span class="sep">/</span> <a href="https://drive.google.com/file/d/1nzWWVVECsd1NaueNDsJt3X869eyLUD5d/view?usp=sharing">Poster</a></div>
+                    <div class="pub-tags">
+                        <span class="pub-tag tag-multimodal-llms">Multimodal LLMs</span>
+                        <span class="pub-tag tag-cv">Computer Vision</span>
+                    </div>
+                </li>
+
+            </ol>
+
+            <h3 class="year-heading" data-year="2023">2023</h3>
+            <ol class="pub-list">
+
+                <li class="pub-entry" data-tags="Audio">
+                    <div class="pub-title">Meta-Learning Framework for End-to-End Imposter Identification in Unseen Speaker Recognition</div>
+                    <div class="pub-authors"><strong>Ashutosh Chaubey</strong>, Sparsh Sinha, Susmita Ghose</div>
+                    <div class="pub-venue">IEEE ASRU, 2023</div>
+                    <div class="pub-links"><a href="https://arxiv.org/abs/2306.00952">Paper</a> <span class="sep">/</span> <a href="https://docs.google.com/presentation/d/1lPLo7s77JfLhfwStNgWdgqkLG1zfg-o7tJxaAFMQsiQ/edit">Poster</a></div>
+                    <div class="pub-tags">
+                        <span class="pub-tag tag-audio">Audio</span>
+                    </div>
+                </li>
+
+            </ol>
+
+            <h3 class="year-heading" data-year="2022">2022</h3>
+            <ol class="pub-list">
+
+                <li class="pub-entry" data-tags="Audio">
+                    <div class="pub-title">Improved Relation Networks for End-to-End Speaker Verification and Identification</div>
+                    <div class="pub-authors"><strong>Ashutosh Chaubey</strong>, Sparsh Sinha, Susmita Ghose</div>
+                    <div class="pub-venue">Interspeech, 2022</div>
+                    <div class="pub-links"><a href="https://arxiv.org/abs/2203.17218">Paper</a> <span class="sep">/</span> <a href="https://drive.google.com/file/d/11N1cBs3BGLuu3g9AFZxnu0eeCJWzVr3B/view?usp=sharing">Poster</a></div>
+                    <div class="pub-tags">
+                        <span class="pub-tag tag-audio">Audio</span>
+                    </div>
+                </li>
+
+                <li class="pub-entry" data-tags="Reinforcement Learning, Computer Vision">
+                    <div class="pub-title">OPAD: An Optimized Policy-based Active Learning Framework for Document Content Analysis</div>
+                    <div class="pub-authors">Sumit Shekhar, Bhanu Prakash Reddy Guda, <strong>Ashutosh Chaubey</strong>, Ishan Jindal, Avneet Jain</div>
+                    <div class="pub-venue">CVPR Workshops, 2022</div>
+                    <div class="pub-links"><a href="https://arxiv.org/abs/2110.02069">Paper</a> <span class="sep">/</span> <a href="https://patentimages.storage.googleapis.com/db/0d/3b/94433a1eacbccc/US20220253630A1.pdf">Patent</a></div>
+                    <div class="pub-tags">
+                        <span class="pub-tag tag-rl">Reinforcement Learning</span>
+                        <span class="pub-tag tag-cv">Computer Vision</span>
+                    </div>
+                </li>
+
+            </ol>
+
+            <h3 class="year-heading" data-year="2020">2020</h3>
+            <ol class="pub-list">
+
+                <li class="pub-entry" data-tags="Computer Vision">
+                    <div class="pub-title">Universal Adversarial Perturbations: A Survey</div>
+                    <div class="pub-authors"><strong>Ashutosh Chaubey*</strong>, Nikhil Agrawal*, Kavya Barnwal, Keerat K. Guliani, Pramod Mehta</div>
+                    <div class="pub-venue">Survey paper, arXiv 2020</div>
+                    <div class="pub-links"><a href="https://arxiv.org/abs/2005.08087">Paper</a></div>
+                    <div class="pub-tags">
+                        <span class="pub-tag tag-cv">Computer Vision</span>
+                    </div>
+                </li>
+
+            </ol>
+
+            <h3 class="year-heading" data-year="2019">2019</h3>
+            <ol class="pub-list">
+
+                <li class="pub-entry" data-tags="Audio">
+                    <div class="pub-title">A Generative Adversarial Network Based Ensemble Technique for Automatic Evaluation of Machine Synthesized Speech</div>
+                    <div class="pub-authors"><strong>Ashutosh Chaubey*</strong>, Jaynil Jaiswal*, Sasi Kiran Reddy Bhimvarapu, Shashank Kashyap, Puneet Kumar, Balasubramanian Raman, Partha Pratim Roy</div>
+                    <div class="pub-venue">ACPR, 2019</div>
+                    <div class="pub-links"><a href="https://dl.acm.org/doi/abs/10.1007/978-3-030-41299-9_45">Paper</a></div>
+                    <div class="pub-tags">
+                        <span class="pub-tag tag-audio">Audio</span>
+                    </div>
+                </li>
+
+            </ol>
+
+            <h3 class="year-heading" data-year="preprints">Preprints</h3>
+            <ol class="pub-list">
+
+                <li class="pub-entry" data-tags="Multimodal LLMs, Audio">
+                    <div class="pub-title">Do Audio LLMs Listen or Read? Analyzing and Mitigating Paralinguistic Failures with VoxParadox</div>
+                    <div class="pub-authors">Jiacheng Pang*, <strong>Ashutosh Chaubey*</strong>, Mohammad Soleymani</div>
+                    <div class="pub-venue">arXiv preprint, 2026</div>
+                    <div class="pub-tags">
+                        <span class="pub-tag tag-multimodal-llms">Multimodal LLMs</span>
+                        <span class="pub-tag tag-audio">Audio</span>
+                    </div>
+                </li>
+
+                <li class="pub-entry" data-tags="Computer Vision, Reinforcement Learning, Video Generation">
+                    <div class="pub-title">GDPO-Listener: Expressive Interactive Head Generation via Auto-Regressive Flow Matching and Group reward-Decoupled Policy Optimization</div>
+                    <div class="pub-authors">Zhangyu Jin, Maksim Siniukov, Deuksin Kwon, <strong>Ashutosh Chaubey</strong>, Mohammad Soleymani</div>
+                    <div class="pub-venue">arXiv preprint, 2026</div>
+                    <div class="pub-links"><a href="https://arxiv.org/abs/2603.25020">arXiv</a></div>
+                    <div class="pub-tags">
+                        <span class="pub-tag tag-cv">Computer Vision</span>
+                        <span class="pub-tag tag-rl">Reinforcement Learning</span>
+                        <span class="pub-tag tag-video">Video Generation</span>
+                    </div>
+                </li>
+
+                <li class="pub-entry" data-tags="Multimodal LLMs">
+                    <div class="pub-title">Sparks of Rationality: Do Reasoning LLMs Align with Human Judgment and Choice?</div>
+                    <div class="pub-authors">Ala N. Tak, Amin Banayeeanzade, Anahita Bolourani, Fatemeh Bahrani, <strong>Ashutosh Chaubey</strong>, Sai Praneeth Karimireddy, Norbert Schwarz, Jonathan Gratch</div>
+                    <div class="pub-venue">arXiv preprint, 2026</div>
+                    <div class="pub-links"><a href="https://arxiv.org/abs/2601.22329">arXiv</a></div>
+                    <div class="pub-tags">
+                        <span class="pub-tag tag-multimodal-llms">Multimodal LLMs</span>
+                    </div>
+                </li>
+
+            </ol>
+        </section>
+
+        <footer>
+            <p>Feel free to use this template from my <a href="https://github.com/ac-alpha/ac-alpha.github.io">GitHub</a>.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Scroll progress
+        (function() {
+            const bar = document.querySelector('.scroll-progress');
+            window.addEventListener('scroll', () => {
+                const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                bar.style.width = (window.scrollY / h) * 100 + '%';
+            });
+        })();
+
+        // Tag filtering
+        (function() {
+            const entries = document.querySelectorAll('.pub-entry[data-tags]');
+            const container = document.getElementById('tagFilters');
+            const selected = new Set();
+
+            const tags = [
+                'Computer Vision', 'Multimodal LLMs', 'Reinforcement Learning',
+                'Audio', 'Face Analysis', 'Video Generation'
+            ];
+
+            tags.sort().forEach(tag => {
+                const btn = document.createElement('button');
+                btn.className = 'tag-filter-btn';
+                btn.textContent = tag;
+                btn.addEventListener('click', () => {
+                    if (selected.has(tag)) { selected.delete(tag); btn.classList.remove('active'); }
+                    else { selected.add(tag); btn.classList.add('active'); }
+                    filter();
+                });
+                container.appendChild(btn);
+            });
+
+            function filter() {
+                const noFilter = selected.size === 0;
+                entries.forEach(e => {
+                    const t = e.dataset.tags.split(',').map(s => s.trim());
+                    const show = noFilter || t.some(tag => selected.has(tag));
+                    e.classList.toggle('hidden', !show);
+                });
+                // Hide year headings with no visible entries
+                document.querySelectorAll('.year-heading[data-year]').forEach(h => {
+                    const list = h.nextElementSibling;
+                    if (!list) return;
+                    const visible = list.querySelectorAll('.pub-entry:not(.hidden)');
+                    h.classList.toggle('hidden', visible.length === 0);
+                    list.style.display = visible.length === 0 ? 'none' : '';
+                });
+            }
+        })();
+    </script>
+</body>
+
+</html>
