@@ -1064,6 +1064,21 @@
             margin: 0;
         }
 
+        .affiliation-logos {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 14px 18px;
+        }
+
+        .affiliation-logos img {
+            height: 36px;
+            max-width: 72px;
+            width: auto;
+            object-fit: contain;
+            display: block;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             body {
@@ -1216,6 +1231,7 @@
                 <h2>About Me</h2>
                 <p>I am a CS PhD student at the <a href="https://ict.usc.edu/">Institute for Creative Technologies</a>, <a href="https://www.usc.edu/">University of Southern California</a>,
                     where I am advised by <a href="https://people.ict.usc.edu/~soleymani/">Prof. Mohammad Soleymani</a> at the <a href="https://www.ihp-lab.org/">Intelligent Human Perception Lab</a>.
+                    I am also a part-time researcher at <a href="https://www.microsoft.com/en-us/research/">Microsoft Research</a><img src="imgs/microsoft_logo.webp" alt="Microsoft logo" class="inline-brand-logo">.
                     I recently interned at <a href="https://ai.meta.com/">Meta Superintelligence Labs</a><img src="imgs/metalogo.png" alt="Meta logo" class="inline-brand-logo">, where I worked on the Voice Modeling team with <a href="https://scholar.google.com/citations?user=Y7gmp58AAAAJ">Jinxi Guo</a>.
                     I am a <i>Bronze Medallist</i> from the 2021 batch of <a href="https://www.iitr.ac.in/">Indian Institute of Technology, Roorkee</a>.</p>
 
@@ -1271,6 +1287,18 @@
                 <div>
                     <b><u>Areas of Interest</u></b> <p>Multimodal LLM Tuning and Post-training, Emotion understanding, Social AI</p>
                 </div>
+
+                <div>
+                    <b><u>Current/Past Affiliations</u></b>
+                    <div class="affiliation-logos">
+                        <a href="https://www.microsoft.com/en-us/research/" title="Microsoft Research"><img src="imgs/microsoft_logo.webp" alt="Microsoft Research logo"></a>
+                        <a href="https://ai.meta.com/" title="Meta Superintelligence Labs"><img src="imgs/metalogo.png" alt="Meta logo"></a>
+                        <a href="https://research.adobe.com/" title="Adobe Research"><img src="imgs/adobe_logo.png" alt="Adobe logo"></a>
+                        <a href="https://www.usc.edu/" title="University of Southern California"><img src="imgs/usc_logo.png" alt="USC logo"></a>
+                        <a href="https://www.iitr.ac.in/" title="IIT Roorkee"><img src="imgs/iitr_logo.png" alt="IIT Roorkee logo"></a>
+                        <a href="https://iisc.ac.in/" title="Indian Institute of Science"><img src="imgs/iisc_logo.jpg" alt="IISc logo"></a>
+                    </div>
+                </div>
                 
             </div>
         </section>
@@ -1279,7 +1307,7 @@
             <h2>News</h2>
                 <div class="news-container">
                 <ul>
-                    <li>Aug '26 - I will be joining <a href="https://www.microsoft.com/en-us/research/">Microsoft Research</a><img src="imgs/microsoft_logo.webp" alt="Microsoft logo" class="inline-brand-logo"> as a Research Intern in Fall 2026. <img src="imgs/new.gif" height="25"></li>
+                    <li>Aug '26 - I joined <a href="https://www.microsoft.com/en-us/research/">Microsoft Research</a><img src="imgs/microsoft_logo.webp" alt="Microsoft logo" class="inline-brand-logo"> as a Research Intern, where I am working on self-evolution of agent harness systems. <img src="imgs/new.gif" height="25"></li>
                     <li>May '26 - I joined <a href="https://ai.meta.com/">Meta Superintelligence Labs</a><img src="imgs/metalogo.png" alt="Meta logo" class="inline-brand-logo"> as a Research Scientist Intern in their Bellevue office, working on the Voice Modeling team. <img src="imgs/new.gif" height="25"></li>
                     <li>Apr '26 - Two papers accepted at <a href="https://icml.cc/">ICML 2026</a>, including one as co-first author! See you in Seoul this July! 🇰🇷</li>
                     <li>Apr '26 - Received <a href="https://cvpr.thecvf.com/">CVPR 2026</a> Travel Scholarship!</li>
